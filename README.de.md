@@ -12,10 +12,14 @@ Die Rezepte basieren auf verschiedenen Rezepten, die ich ausprobiert habe und si
 - Teig aus Weizen-, Dinkel- oder glutenfreiem Mehl
 - Gehzeiten von einem schnellen 2-3-Stunden-Express-Teig bis zur 72-Stunden-Kaltführung
 - Skaliert alle Zutatenmengen auf eine beliebige Anzahl Pizzen
-- Schritt-für-Schritt-Zubereitungsanleitung für das gewählte Rezept
+- Schritt-für-Schritt-Zubereitungsanleitung für das gewählte Rezept, mit Checkboxen zum Festhalten deines Fortschritts
+- Live-Countdown-Timer für Gehzeiten/Ruhephasen, mit Uhrzeit "fertig um" und Browser-Benachrichtigung, wenn ein Schritt fertig ist
+- Lange Gehzeiten/Kaltführungen lassen sich nach Bedarf verkürzen oder verlängern (z. B. 65 Std. statt 72 Std.)
+- Backzeit festlegen: die App berechnet, wann du den Teig starten musst, und zählt rückwärts
+- "Neuen Teig starten" setzt den Fortschritt für das aktuelle Rezept zurück (mit Sicherheitsabfrage)
 - Verfügbar auf Deutsch und Englisch (automatisch je nach Browsersprache, in der App umschaltbar)
 - Installierbar als Progressive Web App (PWA) mit Offline-Unterstützung
-- Merkt sich deine letzten Einstellungen (Mehlsorte, Gehzeit, Pizzenanzahl) im Browser
+- Merkt sich deine letzten Einstellungen, deinen Fortschritt und die geplante Backzeit pro Rezept im Browser
 
 ![Screenshot](screenshot.png)
 
