@@ -10,9 +10,12 @@ export interface StepProgressEntry {
 
 interface ProgressState {
   readonly progress: Record<string, Record<number, StepProgressEntry>>;
+  readonly bakeAt: Record<string, number>;
   readonly toggleStep: (recipeKey: string, stepIndex: number) => void;
   readonly startTimer: (recipeKey: string, stepIndex: number) => void;
   readonly markNotified: (recipeKey: string, stepIndex: number) => void;
+  readonly setBakeAt: (recipeKey: string, timestamp: number) => void;
+  readonly clearBakeAt: (recipeKey: string) => void;
   readonly resetRecipe: (recipeKey: string) => void;
 }
 
@@ -20,6 +23,7 @@ export const useProgressStore = create<ProgressState>()(
   persist(
     (set) => ({
       progress: {},
+      bakeAt: {},
       toggleStep: (recipeKey, stepIndex) =>
         set((state) => {
           const recipeProgress = state.progress[recipeKey] ?? {};
@@ -69,11 +73,22 @@ export const useProgressStore = create<ProgressState>()(
             },
           };
         }),
+      setBakeAt: (recipeKey, timestamp) =>
+        set((state) => ({
+          bakeAt: { ...state.bakeAt, [recipeKey]: timestamp },
+        })),
+      clearBakeAt: (recipeKey) =>
+        set((state) => {
+          const { [recipeKey]: _removed, ...restBakeAt } = state.bakeAt;
+
+          return { bakeAt: restBakeAt };
+        }),
       resetRecipe: (recipeKey) =>
         set((state) => {
-          const { [recipeKey]: _removed, ...rest } = state.progress;
+          const { [recipeKey]: _removedProgress, ...restProgress } = state.progress;
+          const { [recipeKey]: _removedBakeAt, ...restBakeAt } = state.bakeAt;
 
-          return { progress: rest };
+          return { progress: restProgress, bakeAt: restBakeAt };
         }),
     }),
     { name: "teig-rechner.progress" },

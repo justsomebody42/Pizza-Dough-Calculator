@@ -7,6 +7,7 @@ import { formatGrams } from "../calc";
 import { useProgressStore } from "../progressStore";
 import type { RecipeStep } from "../recipesData";
 import { cardSx, colors } from "../styles";
+import { BakeSchedule } from "./BakeSchedule";
 import { CompletedAt } from "./CompletedAt";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { StepTimer } from "./StepTimer";
@@ -21,6 +22,9 @@ export const RecipeSteps: React.FC<{
   const toggleStep = useProgressStore((state) => state.toggleStep);
   const startTimer = useProgressStore((state) => state.startTimer);
   const markNotified = useProgressStore((state) => state.markNotified);
+  const bakeAt = useProgressStore((state) => state.bakeAt[recipeKey]);
+  const setBakeAt = useProgressStore((state) => state.setBakeAt);
+  const clearBakeAt = useProgressStore((state) => state.clearBakeAt);
   const resetRecipe = useProgressStore((state) => state.resetRecipe);
   const [resetOpen, setResetOpen] = useState(false);
 
@@ -32,15 +36,34 @@ export const RecipeSteps: React.FC<{
     flourAmount: formatGrams(calcValues.mehl),
   };
 
+  const totalWaitMinutes = steps.reduce((sum, step) => sum + (step.waitMinutes ?? 0), 0);
+
   return (
     <Card sx={cardSx}>
       <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 1,
+            mb: 1,
+          }}
+        >
+          <Box sx={{ order: { xs: 1, md: 1 } }}>
+            <BakeSchedule
+              totalWaitMinutes={totalWaitMinutes}
+              bakeAt={bakeAt}
+              onSetBakeAt={(timestamp) => setBakeAt(recipeKey, timestamp)}
+              onClearBakeAt={() => clearBakeAt(recipeKey)}
+            />
+          </Box>
           <Button
             size="small"
             startIcon={<RestartAltIcon />}
             onClick={() => setResetOpen(true)}
-            sx={{ color: colors.textMuted }}
+            sx={{ color: colors.textMuted, order: { xs: 0, md: 2 } }}
           >
             <FormattedMessage id="progress.newDough" defaultMessage="Start new dough" />
           </Button>

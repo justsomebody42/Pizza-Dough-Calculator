@@ -30,10 +30,23 @@ export const messages = {
       "vor {minutes, plural, one {1 Minute} other {{minutes} Minuten}}",
     "progress.agoHours":
       "vor {hours, plural, one {1 Stunde} other {{hours} Stunden}}",
-    "progress.agoDays":
-      "vor {days, plural, one {1 Tag} other {{days} Tagen}}",
+    "progress.agoDays": "vor {days, plural, one {1 Tag} other {{days} Tagen}}",
     "progress.agoDaysHours":
       "vor {days, plural, one {1 Tag} other {{days} Tagen}} und {hours, plural, one {1 Stunde} other {{hours} Stunden}}",
+    "progress.bakeAt": "Pizza backen um …",
+    "progress.bakeAtSet": "Backen: {time}",
+    "progress.bakeAtConfirm": "Übernehmen",
+    "progress.bakeAtTooSoon":
+      "Dafür reicht die Zeit nicht – wähle einen späteren Zeitpunkt.",
+    "progress.clearBakeAt": "Backzeitpunkt entfernen",
+    "progress.clearBakeAtTitle": "Backzeitpunkt entfernen?",
+    "progress.clearBakeAtBody":
+      "Der geplante Backzeitpunkt und der zugehörige Timer werden entfernt.",
+    "progress.clearBakeAtConfirm": "Entfernen",
+    "progress.totalDuration":
+      "Gesamtzeit: {days} Tg. {hours} Std. {minutes} Min.",
+    "progress.startBy": "Teig starten: {time}",
+    "progress.startNow": "Jetzt starten!",
     "progress.newDough": "Neuen Teig starten",
     "progress.resetTitle": "Neuen Teig starten?",
     "progress.resetBody":
@@ -46,6 +59,8 @@ export const messages = {
     "progress.cancel": "Abbrechen",
     "progress.notificationTitle": "Teig-Rechner",
     "progress.notificationBody": "{stepTitle} ist fertig!",
+    "language.switchToDe": "Auf Deutsch wechseln",
+    "language.switchToEn": "Auf Englisch wechseln",
     "steps.weizen.express.0.title": "Hefe aktivieren",
     "steps.weizen.express.0.text":
       "{waterAmount} Wasser (lauwarm, ~25°C) und {saltAmount} Salz verrühren. 3 EL Mehl und {yeastAmount} Hefe darin auflösen und 5-10 Minuten warten, bis die Hefe arbeitet und kleine Bläschen entstehen.",
@@ -162,20 +177,35 @@ export const messages = {
     "progress.completedAt": "✓ done at {time}",
     "progress.agoMinutes":
       "{minutes, plural, one {1 minute} other {{minutes} minutes}} ago",
-    "progress.agoHours": "{hours, plural, one {1 hour} other {{hours} hours}} ago",
+    "progress.agoHours":
+      "{hours, plural, one {1 hour} other {{hours} hours}} ago",
     "progress.agoDays": "{days, plural, one {1 day} other {{days} days}} ago",
     "progress.agoDaysHours":
       "{days, plural, one {1 day} other {{days} days}} and {hours, plural, one {1 hour} other {{hours} hours}} ago",
+    "progress.bakeAt": "Bake pizza at …",
+    "progress.bakeAtSet": "Bake at: {time}",
+    "progress.bakeAtConfirm": "Set",
+    "progress.bakeAtTooSoon": "Not enough time for this dough – choose a later time.",
+    "progress.clearBakeAt": "Clear bake time",
+    "progress.clearBakeAtTitle": "Clear the bake time?",
+    "progress.clearBakeAtBody": "This will remove the scheduled bake time and its timer.",
+    "progress.clearBakeAtConfirm": "Clear",
+    "progress.totalDuration": "Total time: {days}d {hours}h {minutes}m",
+    "progress.startBy": "Start dough: {time}",
+    "progress.startNow": "Start now!",
     "progress.newDough": "Start new dough",
     "progress.resetTitle": "Start a new dough?",
     "progress.resetBody": "This will reset all progress for this recipe.",
     "progress.resetConfirm": "Reset",
     "progress.restartTitle": "Restart timer?",
-    "progress.restartBody": "This will restart the timer for this step from the full wait time.",
+    "progress.restartBody":
+      "This will restart the timer for this step from the full wait time.",
     "progress.restartConfirm": "Restart",
     "progress.cancel": "Cancel",
     "progress.notificationTitle": "Dough calculator",
     "progress.notificationBody": "{stepTitle} is ready!",
+    "language.switchToDe": "Switch to German",
+    "language.switchToEn": "Switch to English",
     "steps.weizen.express.0.title": "Activate the yeast",
     "steps.weizen.express.0.text":
       "Stir {waterAmount} water (lukewarm, ~25°C) with {saltAmount} salt. Dissolve {yeastAmount} yeast in it along with 3 tbsp of flour, then wait 5-10 minutes until the yeast starts working and small bubbles appear.",

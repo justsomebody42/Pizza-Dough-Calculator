@@ -26,7 +26,7 @@ export const IngredientStats: React.FC<{
       <CardContent>
         <Grid container spacing={2}>
           {STATS.map((stat) => (
-            <Grid size={{ xs: 6, sm: 2.4 }} key={stat.key}>
+            <Grid size={{ lg: 2, md: 4, sm: 6, xs: 12 }} key={stat.key}>
               <Box
                 sx={{
                   bgcolor: colors.panelBg,
