@@ -19,6 +19,10 @@ The recipies are based on various recipies I tried and are a combination of what
 
 ![Screenshot](screenshot.png)
 
+## AI disclaimer
+
+AI tools were used to assist during the development.
+
 ## License
 
 Licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). You're free to use, modify, and share this project for noncommercial purposes (personal, educational, hobby, etc.). Commercial use requires a separate agreement.

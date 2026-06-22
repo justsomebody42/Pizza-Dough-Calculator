@@ -6,6 +6,7 @@ export type Gehzeit = "2-3" | "24" | "72";
 export interface RecipeStep {
   readonly titleId: MessageKey;
   readonly textId: MessageKey;
+  readonly waitMinutes?: number;
 }
 
 export interface AvailableRecipe {
@@ -57,11 +58,27 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.017,
       steps: [
-        { titleId: "steps.weizen.express.0.title", textId: "steps.weizen.express.0.text" },
+        {
+          titleId: "steps.weizen.express.0.title",
+          textId: "steps.weizen.express.0.text",
+          waitMinutes: 5,
+        },
         { titleId: "steps.weizen.express.1.title", textId: "steps.weizen.express.1.text" },
-        { titleId: "steps.weizen.express.2.title", textId: "steps.weizen.express.2.text" },
-        { titleId: "steps.weizen.express.3.title", textId: "steps.weizen.express.3.text" },
-        { titleId: "steps.weizen.express.4.title", textId: "steps.weizen.express.4.text" },
+        {
+          titleId: "steps.weizen.express.2.title",
+          textId: "steps.weizen.express.2.text",
+          waitMinutes: 20,
+        },
+        {
+          titleId: "steps.weizen.express.3.title",
+          textId: "steps.weizen.express.3.text",
+          waitMinutes: 120,
+        },
+        {
+          titleId: "steps.weizen.express.4.title",
+          textId: "steps.weizen.express.4.text",
+          waitMinutes: 120,
+        },
       ],
     },
     24: {
@@ -76,11 +93,23 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.0035,
       steps: [
-        { titleId: "steps.weizen.24h.0.title", textId: "steps.weizen.24h.0.text" },
+        { titleId: "steps.weizen.24h.0.title", textId: "steps.weizen.24h.0.text", waitMinutes: 5 },
         { titleId: "steps.weizen.24h.1.title", textId: "steps.weizen.24h.1.text" },
-        { titleId: "steps.weizen.24h.2.title", textId: "steps.weizen.24h.2.text" },
-        { titleId: "steps.weizen.24h.3.title", textId: "steps.weizen.24h.3.text" },
-        { titleId: "steps.weizen.24h.4.title", textId: "steps.weizen.24h.4.text" },
+        {
+          titleId: "steps.weizen.24h.2.title",
+          textId: "steps.weizen.24h.2.text",
+          waitMinutes: 30,
+        },
+        {
+          titleId: "steps.weizen.24h.3.title",
+          textId: "steps.weizen.24h.3.text",
+          waitMinutes: 1440,
+        },
+        {
+          titleId: "steps.weizen.24h.4.title",
+          textId: "steps.weizen.24h.4.text",
+          waitMinutes: 180,
+        },
       ],
     },
     72: {
@@ -97,9 +126,26 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       steps: [
         { titleId: "steps.weizen.72h.0.title", textId: "steps.weizen.72h.0.text" },
         { titleId: "steps.weizen.72h.1.title", textId: "steps.weizen.72h.1.text" },
-        { titleId: "steps.weizen.72h.2.title", textId: "steps.weizen.72h.2.text" },
-        { titleId: "steps.weizen.72h.3.title", textId: "steps.weizen.72h.3.text" },
-        { titleId: "steps.weizen.72h.4.title", textId: "steps.weizen.72h.4.text" },
+        {
+          titleId: "steps.weizen.72h.2.title",
+          textId: "steps.weizen.72h.2.text",
+          waitMinutes: 30,
+        },
+        {
+          titleId: "steps.weizen.72h.3.title",
+          textId: "steps.weizen.72h.3.text",
+          waitMinutes: 20,
+        },
+        {
+          titleId: "steps.weizen.72h.4.title",
+          textId: "steps.weizen.72h.4.text",
+          waitMinutes: 4320,
+        },
+        {
+          titleId: "steps.weizen.72h.5.title",
+          textId: "steps.weizen.72h.5.text",
+          waitMinutes: 240,
+        },
       ],
     },
   },
@@ -116,8 +162,16 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       hefeProzent: 0.015,
       steps: [
         { titleId: "steps.dinkel.express.0.title", textId: "steps.dinkel.express.0.text" },
-        { titleId: "steps.dinkel.express.1.title", textId: "steps.dinkel.express.1.text" },
-        { titleId: "steps.dinkel.express.2.title", textId: "steps.dinkel.express.2.text" },
+        {
+          titleId: "steps.dinkel.express.1.title",
+          textId: "steps.dinkel.express.1.text",
+          waitMinutes: 20,
+        },
+        {
+          titleId: "steps.dinkel.express.2.title",
+          textId: "steps.dinkel.express.2.text",
+          waitMinutes: 120,
+        },
       ],
     },
     24: {
@@ -132,9 +186,21 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       hefeProzent: 0.003,
       steps: [
         { titleId: "steps.dinkel.24h.0.title", textId: "steps.dinkel.24h.0.text" },
-        { titleId: "steps.dinkel.24h.1.title", textId: "steps.dinkel.24h.1.text" },
-        { titleId: "steps.dinkel.24h.2.title", textId: "steps.dinkel.24h.2.text" },
-        { titleId: "steps.dinkel.24h.3.title", textId: "steps.dinkel.24h.3.text" },
+        {
+          titleId: "steps.dinkel.24h.1.title",
+          textId: "steps.dinkel.24h.1.text",
+          waitMinutes: 30,
+        },
+        {
+          titleId: "steps.dinkel.24h.2.title",
+          textId: "steps.dinkel.24h.2.text",
+          waitMinutes: 20,
+        },
+        {
+          titleId: "steps.dinkel.24h.3.title",
+          textId: "steps.dinkel.24h.3.text",
+          waitMinutes: 1440,
+        },
       ],
     },
     72: {
@@ -157,7 +223,11 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       hefeProzent: 0.015,
       steps: [
         { titleId: "steps.glutenfrei.express.0.title", textId: "steps.glutenfrei.express.0.text" },
-        { titleId: "steps.glutenfrei.express.1.title", textId: "steps.glutenfrei.express.1.text" },
+        {
+          titleId: "steps.glutenfrei.express.1.title",
+          textId: "steps.glutenfrei.express.1.text",
+          waitMinutes: 90,
+        },
       ],
     },
     24: {
@@ -172,8 +242,16 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       hefeProzent: 0.015,
       steps: [
         { titleId: "steps.glutenfrei.24h.0.title", textId: "steps.glutenfrei.24h.0.text" },
-        { titleId: "steps.glutenfrei.24h.1.title", textId: "steps.glutenfrei.24h.1.text" },
-        { titleId: "steps.glutenfrei.24h.2.title", textId: "steps.glutenfrei.24h.2.text" },
+        {
+          titleId: "steps.glutenfrei.24h.1.title",
+          textId: "steps.glutenfrei.24h.1.text",
+          waitMinutes: 60,
+        },
+        {
+          titleId: "steps.glutenfrei.24h.2.title",
+          textId: "steps.glutenfrei.24h.2.text",
+          waitMinutes: 1440,
+        },
         { titleId: "steps.glutenfrei.24h.3.title", textId: "steps.glutenfrei.24h.3.text" },
       ],
     },

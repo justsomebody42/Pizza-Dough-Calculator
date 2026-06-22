@@ -20,6 +20,32 @@ export const messages = {
     "tips.item": "• {tip}",
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
+    "progress.start": "Timer starten",
+    "progress.restart": "Timer neu starten",
+    "progress.remaining": "Noch {hours} Std. {minutes} Min.",
+    "progress.readyAt": "Fertig: {time}",
+    "progress.ready": "Fertig!",
+    "progress.completedAt": "✓ erledigt um {time}",
+    "progress.agoMinutes":
+      "vor {minutes, plural, one {1 Minute} other {{minutes} Minuten}}",
+    "progress.agoHours":
+      "vor {hours, plural, one {1 Stunde} other {{hours} Stunden}}",
+    "progress.agoDays":
+      "vor {days, plural, one {1 Tag} other {{days} Tagen}}",
+    "progress.agoDaysHours":
+      "vor {days, plural, one {1 Tag} other {{days} Tagen}} und {hours, plural, one {1 Stunde} other {{hours} Stunden}}",
+    "progress.newDough": "Neuen Teig starten",
+    "progress.resetTitle": "Neuen Teig starten?",
+    "progress.resetBody":
+      "Der gesamte Fortschritt für dieses Rezept wird zurückgesetzt.",
+    "progress.resetConfirm": "Zurücksetzen",
+    "progress.restartTitle": "Timer neu starten?",
+    "progress.restartBody":
+      "Der Timer für diesen Schritt wird zurückgesetzt und beginnt wieder bei der vollen Wartezeit.",
+    "progress.restartConfirm": "Neu starten",
+    "progress.cancel": "Abbrechen",
+    "progress.notificationTitle": "Teig-Rechner",
+    "progress.notificationBody": "{stepTitle} ist fertig!",
     "steps.weizen.express.0.title": "Hefe aktivieren",
     "steps.weizen.express.0.text":
       "{waterAmount} Wasser (lauwarm, ~25°C) und {saltAmount} Salz verrühren. 3 EL Mehl und {yeastAmount} Hefe darin auflösen und 5-10 Minuten warten, bis die Hefe arbeitet und kleine Bläschen entstehen.",
@@ -58,12 +84,15 @@ export const messages = {
       "Rest Mehl + {oilAmount} Öl dazu. Nur 1-2 Minuten auf niedrigster Stufe mischen.",
     "steps.weizen.72h.2.title": "Autolyse & Falten",
     "steps.weizen.72h.2.text":
-      "30 Min. bei Raumtemperatur ruhen lassen -> einmal falten. Weitere 20 Min. warten -> ein zweites Mal falten.",
-    "steps.weizen.72h.3.title": "Kalte Stockgare",
+      "30 Min. bei Raumtemperatur ruhen lassen -> einmal falten.",
+    "steps.weizen.72h.3.title": "Zweites Falten",
     "steps.weizen.72h.3.text":
-      "Den Teig luftdicht verpackt für volle ~72 Stunden (3 Tage) im Kühlschrank ruhen lassen und absolut nicht bewegen.",
-    "steps.weizen.72h.4.title": "Stückgare am Backtag",
+      "Weitere 20 Min. warten -> ein zweites Mal falten.",
+    "steps.weizen.72h.4.title": "Kalte Stockgare",
     "steps.weizen.72h.4.text":
+      "Den Teig luftdicht verpackt für volle ~72 Stunden (3 Tage) im Kühlschrank ruhen lassen.",
+    "steps.weizen.72h.5.title": "Stückgare am Backtag",
+    "steps.weizen.72h.5.text":
       "4 Stunden vor dem Backen aus dem Kühlschrank holen. In Ballen teilen, rundschleifen und bei Raumtemperatur aufgehen lassen.",
     "steps.dinkel.express.0.title": "Teig Mischen",
     "steps.dinkel.express.0.text":
@@ -80,7 +109,8 @@ export const messages = {
     "steps.dinkel.24h.1.title": "Sanftes Dehnen & Falten",
     "steps.dinkel.24h.1.text": "30 Min. ruhen lassen -> falten.",
     "steps.dinkel.24h.2.title": "Zweites Falten",
-    "steps.dinkel.24h.2.text": "Weitere 20 Min. warten -> ein zweites Mal falten.",
+    "steps.dinkel.24h.2.text":
+      "Weitere 20 Min. warten -> ein zweites Mal falten.",
     "steps.dinkel.24h.3.title": "Stockgare & Backtag",
     "steps.dinkel.24h.3.text":
       "Für max. 24 Stunden in den Kühlschrank stellen. Am Backtag 3 Stunden vorher Ballen formen.",
@@ -124,6 +154,28 @@ export const messages = {
     "tips.item": "• {tip}",
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
+    "progress.start": "Start timer",
+    "progress.restart": "Restart timer",
+    "progress.remaining": "{hours}h {minutes}m left",
+    "progress.readyAt": "Ready: {time}",
+    "progress.ready": "Ready!",
+    "progress.completedAt": "✓ done at {time}",
+    "progress.agoMinutes":
+      "{minutes, plural, one {1 minute} other {{minutes} minutes}} ago",
+    "progress.agoHours": "{hours, plural, one {1 hour} other {{hours} hours}} ago",
+    "progress.agoDays": "{days, plural, one {1 day} other {{days} days}} ago",
+    "progress.agoDaysHours":
+      "{days, plural, one {1 day} other {{days} days}} and {hours, plural, one {1 hour} other {{hours} hours}} ago",
+    "progress.newDough": "Start new dough",
+    "progress.resetTitle": "Start a new dough?",
+    "progress.resetBody": "This will reset all progress for this recipe.",
+    "progress.resetConfirm": "Reset",
+    "progress.restartTitle": "Restart timer?",
+    "progress.restartBody": "This will restart the timer for this step from the full wait time.",
+    "progress.restartConfirm": "Restart",
+    "progress.cancel": "Cancel",
+    "progress.notificationTitle": "Dough calculator",
+    "progress.notificationBody": "{stepTitle} is ready!",
     "steps.weizen.express.0.title": "Activate the yeast",
     "steps.weizen.express.0.text":
       "Stir {waterAmount} water (lukewarm, ~25°C) with {saltAmount} salt. Dissolve {yeastAmount} yeast in it along with 3 tbsp of flour, then wait 5-10 minutes until the yeast starts working and small bubbles appear.",
@@ -162,12 +214,14 @@ export const messages = {
       "Add the rest of the flour plus {oilAmount} oil. Mix on the lowest setting for only 1-2 minutes.",
     "steps.weizen.72h.2.title": "Autolysis & folding",
     "steps.weizen.72h.2.text":
-      "Rest for 30 min. at room temperature -> fold once. Wait another 20 min. -> fold a second time.",
-    "steps.weizen.72h.3.title": "Cold bulk fermentation",
-    "steps.weizen.72h.3.text":
-      "Wrap the dough airtight and let it rest in the fridge for a full ~72 hours (3 days) without disturbing it at all.",
-    "steps.weizen.72h.4.title": "Final proof on baking day",
+      "Rest for 30 min. at room temperature -> fold once.",
+    "steps.weizen.72h.3.title": "Second fold",
+    "steps.weizen.72h.3.text": "Wait another 20 min. -> fold a second time.",
+    "steps.weizen.72h.4.title": "Cold bulk fermentation",
     "steps.weizen.72h.4.text":
+      "Wrap the dough airtight and let it rest in the fridge for a full ~72 hours (3 days).",
+    "steps.weizen.72h.5.title": "Final proof on baking day",
+    "steps.weizen.72h.5.text":
       "Take it out of the fridge 4 hours before baking. Divide into balls, shape them round, and let rise at room temperature.",
     "steps.dinkel.express.0.title": "Mix the dough",
     "steps.dinkel.express.0.text":

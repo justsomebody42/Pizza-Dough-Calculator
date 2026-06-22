@@ -26,6 +26,7 @@ export const App = () => {
   } = useConfigStore();
 
   const recipe = recipesData[mehlart][gehzeit];
+  const recipeKey = `${mehlart}-${gehzeit}`;
 
   const calcValues = useMemo(
     () => (recipe.available ? calculateIngredients(recipe, pizzen) : null),
@@ -85,7 +86,11 @@ export const App = () => {
           <Box>
             <IngredientStats calcValues={calcValues} />
             <FlourTips tips={recipe.mehlTipp} />
-            <RecipeSteps steps={recipe.steps} calcValues={calcValues} />
+            <RecipeSteps
+              steps={recipe.steps}
+              calcValues={calcValues}
+              recipeKey={recipeKey}
+            />
           </Box>
         ) : (
           <UnavailableAlert reason={recipe.mehlTipp[0]} />

@@ -19,6 +19,10 @@ Die Rezepte basieren auf verschiedenen Rezepten, die ich ausprobiert habe und si
 
 ![Screenshot](screenshot.png)
 
+## KI disclaimer
+
+KI tools wurden zur Unterstützung der Entwicklung genutzt.
+
 ## Lizenz
 
 Lizenziert unter der [PolyForm Noncommercial License 1.0.0](LICENSE). Du darfst dieses Projekt für nicht-kommerzielle Zwecke (privat, Bildung, Hobby, etc.) frei nutzen, verändern und weitergeben. Für kommerzielle Nutzung ist eine separate Vereinbarung erforderlich.
