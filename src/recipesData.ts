@@ -9,6 +9,24 @@ export interface RecipeStep {
   readonly waitMinutes?: number;
 }
 
+// The step with the longest wait is the one users want to shorten/extend
+// (cold ferment, or the final pre-bake rest for the quick recipes). On a
+// tie, the later step wins since it's the one closer to the actual bake.
+export const getAdjustableStepIndex = (steps: readonly RecipeStep[]): number | undefined => {
+  let bestIndex: number | undefined;
+  let bestMinutes = 0;
+
+  steps.forEach((step, index) => {
+    const minutes = step.waitMinutes ?? 0;
+    if (minutes > 0 && minutes >= bestMinutes) {
+      bestMinutes = minutes;
+      bestIndex = index;
+    }
+  });
+
+  return bestIndex;
+};
+
 export interface AvailableRecipe {
   readonly available: true;
   readonly mehlTipp: readonly string[];
@@ -63,7 +81,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
           textId: "steps.weizen.express.0.text",
           waitMinutes: 5,
         },
-        { titleId: "steps.weizen.express.1.title", textId: "steps.weizen.express.1.text" },
+        {
+          titleId: "steps.weizen.express.1.title",
+          textId: "steps.weizen.express.1.text",
+        },
         {
           titleId: "steps.weizen.express.2.title",
           textId: "steps.weizen.express.2.text",
@@ -93,8 +114,15 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.0035,
       steps: [
-        { titleId: "steps.weizen.24h.0.title", textId: "steps.weizen.24h.0.text", waitMinutes: 5 },
-        { titleId: "steps.weizen.24h.1.title", textId: "steps.weizen.24h.1.text" },
+        {
+          titleId: "steps.weizen.24h.0.title",
+          textId: "steps.weizen.24h.0.text",
+          waitMinutes: 5,
+        },
+        {
+          titleId: "steps.weizen.24h.1.title",
+          textId: "steps.weizen.24h.1.text",
+        },
         {
           titleId: "steps.weizen.24h.2.title",
           textId: "steps.weizen.24h.2.text",
@@ -124,8 +152,14 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.0018,
       steps: [
-        { titleId: "steps.weizen.72h.0.title", textId: "steps.weizen.72h.0.text" },
-        { titleId: "steps.weizen.72h.1.title", textId: "steps.weizen.72h.1.text" },
+        {
+          titleId: "steps.weizen.72h.0.title",
+          textId: "steps.weizen.72h.0.text",
+        },
+        {
+          titleId: "steps.weizen.72h.1.title",
+          textId: "steps.weizen.72h.1.text",
+        },
         {
           titleId: "steps.weizen.72h.2.title",
           textId: "steps.weizen.72h.2.text",
@@ -153,7 +187,7 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
     "2-3": {
       available: true,
       mehlTipp: [
-        "Frießinger Mühle: 'Spezialmehl für Dinkel Pizza' Typ 630 / Tipo 00",
+        "Frießinger Mühle: 'Spezialmehl für Dinkel Pizza'",
         "Alternative: Baula Bio: 'Dinkelmehl Type 630'",
       ],
       hydratation: 0.57,
@@ -161,7 +195,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.015,
       steps: [
-        { titleId: "steps.dinkel.express.0.title", textId: "steps.dinkel.express.0.text" },
+        {
+          titleId: "steps.dinkel.express.0.title",
+          textId: "steps.dinkel.express.0.text",
+        },
         {
           titleId: "steps.dinkel.express.1.title",
           textId: "steps.dinkel.express.1.text",
@@ -185,7 +222,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.02,
       hefeProzent: 0.003,
       steps: [
-        { titleId: "steps.dinkel.24h.0.title", textId: "steps.dinkel.24h.0.text" },
+        {
+          titleId: "steps.dinkel.24h.0.title",
+          textId: "steps.dinkel.24h.0.text",
+        },
         {
           titleId: "steps.dinkel.24h.1.title",
           textId: "steps.dinkel.24h.1.text",
@@ -222,7 +262,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.03,
       hefeProzent: 0.015,
       steps: [
-        { titleId: "steps.glutenfrei.express.0.title", textId: "steps.glutenfrei.express.0.text" },
+        {
+          titleId: "steps.glutenfrei.express.0.title",
+          textId: "steps.glutenfrei.express.0.text",
+        },
         {
           titleId: "steps.glutenfrei.express.1.title",
           textId: "steps.glutenfrei.express.1.text",
@@ -241,7 +284,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
       oelProzent: 0.035,
       hefeProzent: 0.015,
       steps: [
-        { titleId: "steps.glutenfrei.24h.0.title", textId: "steps.glutenfrei.24h.0.text" },
+        {
+          titleId: "steps.glutenfrei.24h.0.title",
+          textId: "steps.glutenfrei.24h.0.text",
+        },
         {
           titleId: "steps.glutenfrei.24h.1.title",
           textId: "steps.glutenfrei.24h.1.text",
@@ -252,7 +298,10 @@ export const recipesData: Record<MehlArt, Record<Gehzeit, Recipe>> = {
           textId: "steps.glutenfrei.24h.2.text",
           waitMinutes: 1440,
         },
-        { titleId: "steps.glutenfrei.24h.3.title", textId: "steps.glutenfrei.24h.3.text" },
+        {
+          titleId: "steps.glutenfrei.24h.3.title",
+          textId: "steps.glutenfrei.24h.3.text",
+        },
       ],
     },
     72: {

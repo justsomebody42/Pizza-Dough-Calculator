@@ -4,8 +4,10 @@ import { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import type { CalcValues } from "../calc";
 import { formatGrams } from "../calc";
+import { formatHoursLabel } from "../dateFormat";
 import { useProgressStore } from "../progressStore";
-import type { RecipeStep } from "../recipesData";
+import { getAdjustableStepIndex, type RecipeStep } from "../recipesData";
+import { useConfigStore } from "../store";
 import { cardSx, colors } from "../styles";
 import { BakeSchedule } from "./BakeSchedule";
 import { CompletedAt } from "./CompletedAt";
@@ -18,6 +20,7 @@ export const RecipeSteps: React.FC<{
   readonly recipeKey: string;
 }> = ({ steps, calcValues, recipeKey }) => {
   const { formatMessage } = useIntl();
+  const locale = useConfigStore((state) => state.locale);
   const recipeProgress = useProgressStore((state) => state.progress[recipeKey]);
   const toggleStep = useProgressStore((state) => state.toggleStep);
   const startTimer = useProgressStore((state) => state.startTimer);
@@ -36,7 +39,24 @@ export const RecipeSteps: React.FC<{
     flourAmount: formatGrams(calcValues.mehl),
   };
 
-  const totalWaitMinutes = steps.reduce((sum, step) => sum + (step.waitMinutes ?? 0), 0);
+  const adjustableStepIndex = getAdjustableStepIndex(steps);
+
+  const effectiveWaitMinutes = (step: RecipeStep, index: number): number | undefined => {
+    if (step.waitMinutes === undefined) {
+      return undefined;
+    }
+
+    if (index !== adjustableStepIndex) {
+      return step.waitMinutes;
+    }
+
+    return recipeProgress?.[index]?.waitMinutesOverride ?? step.waitMinutes;
+  };
+
+  const totalWaitMinutes = steps.reduce(
+    (sum, step, index) => sum + (effectiveWaitMinutes(step, index) ?? 0),
+    0,
+  );
 
   return (
     <Card sx={cardSx}>
@@ -75,6 +95,11 @@ export const RecipeSteps: React.FC<{
             const previousDone = index === 0 || (recipeProgress?.[index - 1]?.done ?? false);
             const nextDone = recipeProgress?.[index + 1]?.done ?? false;
             const checkboxDisabled = done ? nextDone : !previousDone;
+            const waitMinutes = effectiveWaitMinutes(step, index);
+            const textParams =
+              index === adjustableStepIndex && waitMinutes !== undefined
+                ? { ...amounts, hours: formatHoursLabel(waitMinutes, locale) }
+                : amounts;
 
             return (
               <Box
@@ -104,11 +129,11 @@ export const RecipeSteps: React.FC<{
                   ) : (
                     <>
                       <Typography variant="body2" sx={{ color: colors.textMuted, mt: 0.5 }}>
-                        {formatMessage({ id: step.textId }, amounts)}
+                        {formatMessage({ id: step.textId }, textParams)}
                       </Typography>
-                      {step.waitMinutes !== undefined && previousDone && (
+                      {waitMinutes !== undefined && previousDone && (
                         <StepTimer
-                          waitMinutes={step.waitMinutes}
+                          waitMinutes={waitMinutes}
                           startedAt={entry?.startedAt}
                           notified={entry?.notified ?? false}
                           stepTitle={formatMessage({ id: step.titleId })}

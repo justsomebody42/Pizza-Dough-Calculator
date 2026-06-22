@@ -6,6 +6,7 @@ export interface StepProgressEntry {
   readonly doneAt?: number;
   readonly startedAt?: number;
   readonly notified?: boolean;
+  readonly waitMinutesOverride?: number;
 }
 
 interface ProgressState {
@@ -14,6 +15,7 @@ interface ProgressState {
   readonly toggleStep: (recipeKey: string, stepIndex: number) => void;
   readonly startTimer: (recipeKey: string, stepIndex: number) => void;
   readonly markNotified: (recipeKey: string, stepIndex: number) => void;
+  readonly setWaitMinutesOverride: (recipeKey: string, stepIndex: number, minutes: number) => void;
   readonly setBakeAt: (recipeKey: string, timestamp: number) => void;
   readonly clearBakeAt: (recipeKey: string) => void;
   readonly resetRecipe: (recipeKey: string) => void;
@@ -69,6 +71,25 @@ export const useProgressStore = create<ProgressState>()(
               [recipeKey]: {
                 ...recipeProgress,
                 [stepIndex]: { ...entry, notified: true },
+              },
+            },
+          };
+        }),
+      setWaitMinutesOverride: (recipeKey, stepIndex, minutes) =>
+        set((state) => {
+          const recipeProgress = state.progress[recipeKey] ?? {};
+          const entry = recipeProgress[stepIndex];
+
+          return {
+            progress: {
+              ...state.progress,
+              [recipeKey]: {
+                ...recipeProgress,
+                [stepIndex]: {
+                  ...entry,
+                  done: entry?.done ?? false,
+                  waitMinutesOverride: minutes,
+                },
               },
             },
           };

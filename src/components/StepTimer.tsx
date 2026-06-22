@@ -87,15 +87,16 @@ export const StepTimer: React.FC<{
   const targetDate = new Date(target as number);
   const timeLabel = formatClockLabel(targetDate, locale, now);
 
-  const totalMinutesLeft = Math.max(0, Math.ceil((remainingMs as number) / 60_000));
-  const hours = Math.floor(totalMinutesLeft / 60);
-  const minutes = totalMinutesLeft % 60;
+  const totalSecondsLeft = Math.max(0, Math.ceil((remainingMs as number) / 1000));
+  const hours = Math.floor(totalSecondsLeft / 3600);
+  const minutes = Math.floor((totalSecondsLeft % 3600) / 60);
+  const seconds = totalSecondsLeft % 60;
 
   return (
     <Box sx={{ mt: 0.5 }}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
         <Typography variant="body2" sx={{ color: colors.water }}>
-          {formatMessage({ id: "progress.remaining" }, { hours, minutes })}
+          {formatMessage({ id: "progress.remainingWithSeconds" }, { hours, minutes, seconds })}
         </Typography>
         <Tooltip title={formatMessage({ id: "progress.restart" })}>
           <IconButton
