@@ -1,0 +1,213 @@
+export const messages = {
+  de: {
+    "app.title": "Pizza Teig Rechner",
+    "config.mehlart.label": "Mehlart",
+    "config.gehzeit.label": "Gehzeit",
+    "config.pizzen.label": "Anzahl Pizzen",
+    "config.mehlart.weizen": "Weizen (Tipo 00)",
+    "config.mehlart.dinkel": "Dinkel (630 / 812)",
+    "config.mehlart.glutenfrei": "Glutenfrei",
+    "config.gehzeit.express": "2 - 3 Stunden",
+    "config.gehzeit.24h": "~24 Stunden",
+    "config.gehzeit.72h": "~72 Stunden",
+    "stats.mehl": "Mehl",
+    "stats.wasser": "Wasser",
+    "stats.salz": "Salz",
+    "stats.oel": "Olivenöl",
+    "stats.hefe": "Frische Hefe",
+    "stats.unit.gram": "{value} g",
+    "tips.heading": "Empfohlene Mehlsorten:",
+    "tips.item": "• {tip}",
+    "error.unavailable": "{reason}",
+    "footer.version": "⭐ v{version}",
+    "steps.weizen.express.0.title": "Hefe aktivieren",
+    "steps.weizen.express.0.text":
+      "{waterAmount} Wasser (lauwarm, ~25°C) und {saltAmount} Salz verrühren. 3 EL Mehl und {yeastAmount} Hefe darin auflösen und 5-10 Minuten warten, bis die Hefe arbeitet und kleine Bläschen entstehen.",
+    "steps.weizen.express.1.title": "Teig mischen",
+    "steps.weizen.express.1.text":
+      "Rest Mehl + {oilAmount} Öl zugeben. Mit Knethaken 1-2 Min. auf niedrigster Stufe mischen.",
+    "steps.weizen.express.2.title": "Autolyse & Falten",
+    "steps.weizen.express.2.text":
+      "Teig 20 Minuten abgedeckt bei Raumtemperatur entspannen lassen. Danach mit feuchten Händen von 4 Seiten in die Mitte falten, bis er glatt wird.",
+    "steps.weizen.express.3.title": "Stockgare",
+    "steps.weizen.express.3.text":
+      "Den Teig im Ganzen abgedeckt für 2 Stunden bei Raumtemperatur gehen lassen.",
+    "steps.weizen.express.4.title": "Stückgare am Backtag",
+    "steps.weizen.express.4.text":
+      "Teig in Ballen teilen, rundschleifen und abgedeckt weitere 2 bis 3 Stunden bei Raumtemperatur gehen lassen. Danach direkt im Ofen backen.",
+    "steps.weizen.24h.0.title": "Hefe auflösen",
+    "steps.weizen.24h.0.text":
+      "{waterAmount} kaltes Wasser und {saltAmount} Salz verrühren. 3 EL Mehl und {yeastAmount} Hefe darin auflösen und 5 Minuten ruhen lassen.",
+    "steps.weizen.24h.1.title": "Teig mischen",
+    "steps.weizen.24h.1.text":
+      "Rest Mehl + {oilAmount} Öl zugeben. Mit Knethaken 1-2 Min. auf niedrigster Stufe mischen.",
+    "steps.weizen.24h.2.title": "Autolyse & Falten",
+    "steps.weizen.24h.2.text":
+      "30 Minuten abgedeckt bei Raumtemperatur entspannen lassen. Danach mit feuchten Händen von 4 Seiten in die Mitte falten.",
+    "steps.weizen.24h.3.title": "Kalte Stockgare",
+    "steps.weizen.24h.3.text":
+      "Als ganzen Klumpen luftdicht für ~24 Stunden in den Kühlschrank stellen.",
+    "steps.weizen.24h.4.title": "Stückgare am Backtag",
+    "steps.weizen.24h.4.text":
+      "3 bis 4 Stunden vor dem Backen aus dem Kühlschrank holen. In Ballen teilen, rundschleifen und bei Raumtemperatur gehen lassen.",
+    "steps.weizen.72h.0.title": "Hefe auflösen",
+    "steps.weizen.72h.0.text":
+      "{waterAmount} kaltes Wasser, {saltAmount} Salz, etwas Mehl und die Mini-Menge {yeastAmount} Hefe verrühren.",
+    "steps.weizen.72h.1.title": "Teig mischen",
+    "steps.weizen.72h.1.text":
+      "Rest Mehl + {oilAmount} Öl dazu. Nur 1-2 Minuten auf niedrigster Stufe mischen.",
+    "steps.weizen.72h.2.title": "Autolyse & Falten",
+    "steps.weizen.72h.2.text":
+      "30 Min. bei Raumtemperatur ruhen lassen -> einmal falten. Weitere 20 Min. warten -> ein zweites Mal falten.",
+    "steps.weizen.72h.3.title": "Kalte Stockgare",
+    "steps.weizen.72h.3.text":
+      "Den Teig luftdicht verpackt für volle ~72 Stunden (3 Tage) im Kühlschrank ruhen lassen und absolut nicht bewegen.",
+    "steps.weizen.72h.4.title": "Stückgare am Backtag",
+    "steps.weizen.72h.4.text":
+      "4 Stunden vor dem Backen aus dem Kühlschrank holen. In Ballen teilen, rundschleifen und bei Raumtemperatur aufgehen lassen.",
+    "steps.dinkel.express.0.title": "Teig Mischen",
+    "steps.dinkel.express.0.text":
+      "Maximal 1 Minute auf niedrigster Stufe mischen. Dinkel-Gluten ist empfindlich gegen mechanischen Stress!",
+    "steps.dinkel.express.1.title": "Sanftes Dehnen & Falten",
+    "steps.dinkel.express.1.text":
+      "20 Minuten ruhen lassen. Danach sehr behutsam falten, um das empfindliche Gerüst nicht zu zerreißen.",
+    "steps.dinkel.express.2.title": "Stockgare & Formen",
+    "steps.dinkel.express.2.text":
+      "Den Teig abgedeckt ca. 2 Stunden bei Raumtemperatur gehen lassen, dabei weiterhin schonend behandeln. Anschließend vorsichtig in Ballen teilen, rundschleifen und direkt im Ofen backen.",
+    "steps.dinkel.24h.0.title": "Teig mischen",
+    "steps.dinkel.24h.0.text":
+      "{waterAmount} kaltes Wasser, {saltAmount} Salz, {yeastAmount} Hefe, {flourAmount} Mehl und {oilAmount} Öl in die Schüssel geben. Exakt 1 Minute auf niedrigster Stufe mischen.",
+    "steps.dinkel.24h.1.title": "Sanftes Dehnen & Falten",
+    "steps.dinkel.24h.1.text": "30 Min. ruhen lassen -> falten.",
+    "steps.dinkel.24h.2.title": "Zweites Falten",
+    "steps.dinkel.24h.2.text": "Weitere 20 Min. warten -> ein zweites Mal falten.",
+    "steps.dinkel.24h.3.title": "Stockgare & Backtag",
+    "steps.dinkel.24h.3.text":
+      "Für max. 24 Stunden in den Kühlschrank stellen. Am Backtag 3 Stunden vorher Ballen formen.",
+    "steps.glutenfrei.express.0.title": "Teig kneten",
+    "steps.glutenfrei.express.0.text":
+      "{flourAmount} Mehl, {waterAmount} Wasser, {saltAmount} Salz, {oilAmount} Öl und {yeastAmount} Hefe kräftig zu einer homogenen, pastösen Masse verrühren. Kein Gluten = keine Struktur zerstörbar.",
+    "steps.glutenfrei.express.1.title": "Direkte Stückgare",
+    "steps.glutenfrei.express.1.text":
+      "Mit geölten Händen Teiglinge direkt auf Backpapier formen und 1,5 Stunden ruhen lassen. Danach direkt in den Ofen.",
+    "steps.glutenfrei.24h.0.title": "Teig mischen",
+    "steps.glutenfrei.24h.0.text":
+      "{flourAmount} Mehl und {saltAmount} Salz vermischen, {yeastAmount} Hefe und eine Prise Zucker in {waterAmount} Wasser auflösen und unterrühren. Mit den Händen ca. 5 Minuten kneten, {oilAmount} Öl einarbeiten und weitere 5 Minuten kneten - der Teig ist klebrig, Hände dabei leicht befeuchten.",
+    "steps.glutenfrei.24h.1.title": "Stockgare & Portionieren",
+    "steps.glutenfrei.24h.1.text":
+      "Teig zu einer Kugel formen und 60 Minuten ruhen lassen. Danach in Stücke teilen und vorsichtig zu Kugeln formen - ohne Glutengerüst reißt der Teig leicht.",
+    "steps.glutenfrei.24h.2.title": "Kalte Stückgare & Backtag",
+    "steps.glutenfrei.24h.2.text":
+      "Teiglinge abgedeckt für ~24 Stunden in den Kühlschrank stellen. Am Backtag 3 Stunden vorher herausnehmen und auf Raumtemperatur kommen lassen.",
+    "steps.glutenfrei.24h.3.title": "Formen",
+    "steps.glutenfrei.24h.3.text":
+      "Teigling auf reichlich glutenfreiem Mehl wenden und mit den Fingerspitzen von der Mitte zum Rand drücken, dabei einen Rand stehen lassen. Teig um 180° drehen (nicht wenden) und wiederholen, bis die gewünschte Größe erreicht ist.",
+  },
+  en: {
+    "app.title": "Pizza Dough Calculator",
+    "config.mehlart.label": "Flour type",
+    "config.gehzeit.label": "Rise time",
+    "config.pizzen.label": "Number of pizzas",
+    "config.mehlart.weizen": "Wheat (Tipo 00)",
+    "config.mehlart.dinkel": "Spelt (630 / 812)",
+    "config.mehlart.glutenfrei": "Gluten-free",
+    "config.gehzeit.express": "2 - 3 hours",
+    "config.gehzeit.24h": "~24 hours",
+    "config.gehzeit.72h": "~72 hours",
+    "stats.mehl": "Flour",
+    "stats.wasser": "Water",
+    "stats.salz": "Salt",
+    "stats.oel": "Olive oil",
+    "stats.hefe": "Fresh yeast",
+    "stats.unit.gram": "{value} g",
+    "tips.heading": "Recommended flour types:",
+    "tips.item": "• {tip}",
+    "error.unavailable": "{reason}",
+    "footer.version": "⭐ v{version}",
+    "steps.weizen.express.0.title": "Activate the yeast",
+    "steps.weizen.express.0.text":
+      "Stir {waterAmount} water (lukewarm, ~25°C) with {saltAmount} salt. Dissolve {yeastAmount} yeast in it along with 3 tbsp of flour, then wait 5-10 minutes until the yeast starts working and small bubbles appear.",
+    "steps.weizen.express.1.title": "Mix the dough",
+    "steps.weizen.express.1.text":
+      "Add the rest of the flour plus {oilAmount} oil. Mix with a dough hook on the lowest setting for 1-2 minutes.",
+    "steps.weizen.express.2.title": "Autolysis & folding",
+    "steps.weizen.express.2.text":
+      "Let the dough rest, covered, at room temperature for 20 minutes. Then, with wet hands, fold it from all 4 sides into the middle until smooth.",
+    "steps.weizen.express.3.title": "Bulk fermentation",
+    "steps.weizen.express.3.text":
+      "Let the whole dough rise, covered, at room temperature for 2 hours.",
+    "steps.weizen.express.4.title": "Final proof on baking day",
+    "steps.weizen.express.4.text":
+      "Divide the dough into balls, shape them round, and let them rise, covered, for another 2 to 3 hours at room temperature. Then bake immediately.",
+    "steps.weizen.24h.0.title": "Dissolve the yeast",
+    "steps.weizen.24h.0.text":
+      "Stir {waterAmount} cold water with {saltAmount} salt. Dissolve {yeastAmount} yeast in it along with 3 tbsp of flour and let it sit for 5 minutes.",
+    "steps.weizen.24h.1.title": "Mix the dough",
+    "steps.weizen.24h.1.text":
+      "Add the rest of the flour plus {oilAmount} oil. Mix with a dough hook on the lowest setting for 1-2 minutes.",
+    "steps.weizen.24h.2.title": "Autolysis & folding",
+    "steps.weizen.24h.2.text":
+      "Let it rest, covered, at room temperature for 30 minutes. Then, with wet hands, fold it from all 4 sides into the middle.",
+    "steps.weizen.24h.3.title": "Cold bulk fermentation",
+    "steps.weizen.24h.3.text":
+      "Place the dough as a whole lump, airtight, in the fridge for about 24 hours.",
+    "steps.weizen.24h.4.title": "Final proof on baking day",
+    "steps.weizen.24h.4.text":
+      "Take it out of the fridge 3 to 4 hours before baking. Divide into balls, shape them round, and let rise at room temperature.",
+    "steps.weizen.72h.0.title": "Dissolve the yeast",
+    "steps.weizen.72h.0.text":
+      "Stir {waterAmount} cold water, {saltAmount} salt, a bit of flour and the tiny amount of {yeastAmount} yeast together.",
+    "steps.weizen.72h.1.title": "Mix the dough",
+    "steps.weizen.72h.1.text":
+      "Add the rest of the flour plus {oilAmount} oil. Mix on the lowest setting for only 1-2 minutes.",
+    "steps.weizen.72h.2.title": "Autolysis & folding",
+    "steps.weizen.72h.2.text":
+      "Rest for 30 min. at room temperature -> fold once. Wait another 20 min. -> fold a second time.",
+    "steps.weizen.72h.3.title": "Cold bulk fermentation",
+    "steps.weizen.72h.3.text":
+      "Wrap the dough airtight and let it rest in the fridge for a full ~72 hours (3 days) without disturbing it at all.",
+    "steps.weizen.72h.4.title": "Final proof on baking day",
+    "steps.weizen.72h.4.text":
+      "Take it out of the fridge 4 hours before baking. Divide into balls, shape them round, and let rise at room temperature.",
+    "steps.dinkel.express.0.title": "Mix the dough",
+    "steps.dinkel.express.0.text":
+      "Mix for no more than 1 minute on the lowest setting. Spelt gluten is sensitive to mechanical stress!",
+    "steps.dinkel.express.1.title": "Gentle stretch & fold",
+    "steps.dinkel.express.1.text":
+      "Let rest for 20 minutes. Then fold very gently so as not to tear the delicate gluten structure.",
+    "steps.dinkel.express.2.title": "Bulk rise & shaping",
+    "steps.dinkel.express.2.text":
+      "Let the dough rise, covered, at room temperature for about 2 hours, continuing to handle it gently. Then carefully divide it into balls, shape them round, and bake immediately.",
+    "steps.dinkel.24h.0.title": "Mix the dough",
+    "steps.dinkel.24h.0.text":
+      "Put {waterAmount} cold water, {saltAmount} salt, {yeastAmount} yeast, {flourAmount} flour and {oilAmount} oil into the bowl. Mix on the lowest setting for 1 minute.",
+    "steps.dinkel.24h.1.title": "Gentle stretch & fold",
+    "steps.dinkel.24h.1.text": "Rest for 30 min. -> fold.",
+    "steps.dinkel.24h.2.title": "Second fold",
+    "steps.dinkel.24h.2.text": "Wait another 20 min. -> fold a second time.",
+    "steps.dinkel.24h.3.title": "Bulk fermentation & baking day",
+    "steps.dinkel.24h.3.text":
+      "Refrigerate for max. 24 hours. On baking day, shape into balls 3 hours beforehand.",
+    "steps.glutenfrei.express.0.title": "Knead the dough",
+    "steps.glutenfrei.express.0.text":
+      "Vigorously stir {flourAmount} flour, {waterAmount} water, {saltAmount} salt, {oilAmount} oil and {yeastAmount} yeast into a smooth, paste-like mass. No gluten means no structure to destroy.",
+    "steps.glutenfrei.express.1.title": "Direct final proof",
+    "steps.glutenfrei.express.1.text":
+      "With oiled hands, shape the dough balls directly on baking paper and let rest for 1.5 hours. Then straight into the oven.",
+    "steps.glutenfrei.24h.0.title": "Mix the dough",
+    "steps.glutenfrei.24h.0.text":
+      "Mix {flourAmount} flour with {saltAmount} salt, dissolve {yeastAmount} yeast and a pinch of sugar in the {waterAmount} water, and stir it in. Knead by hand for about 5 minutes, work in the {oilAmount} oil and knead for another 5 minutes — the dough is sticky, so keep your hands lightly dampened.",
+    "steps.glutenfrei.24h.1.title": "Bulk rise & dividing",
+    "steps.glutenfrei.24h.1.text":
+      "Shape into one ball and let it rest for 60 minutes. Then divide into pieces and shape them gently into balls — without gluten, the dough tears easily.",
+    "steps.glutenfrei.24h.2.title": "Cold final proof & baking day",
+    "steps.glutenfrei.24h.2.text":
+      "Refrigerate the dough balls, covered, for about 24 hours. On baking day, take them out 3 hours beforehand and let them come to room temperature.",
+    "steps.glutenfrei.24h.3.title": "Shaping",
+    "steps.glutenfrei.24h.3.text":
+      "Turn the dough ball out onto plenty of gluten-free flour and press from the center outward with your fingertips, leaving a border. Rotate it 180° (don't flip it) and repeat until it reaches the size you want.",
+  },
+} as const;
+
+export type Locale = keyof typeof messages;
+export type MessageKey = keyof (typeof messages)["de"];
