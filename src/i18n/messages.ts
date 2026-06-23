@@ -106,7 +106,7 @@ export const messages = {
       "{duration} vor dem Backen aus dem Kühlschrank holen. In Ballen teilen, rundschleifen und bei Raumtemperatur gehen lassen. Bei nur 16 Stunden Stockgare die Stückgare auf ca. 4,5 Stunden ausreizen, damit der Kern warm wird. Bei 48 Stunden Stockgare auf maximal 3 Stunden reduzieren.",
     "steps.weizen.72h.0.title": "Hefe auflösen",
     "steps.weizen.72h.0.text":
-      "{waterAmount} kaltes Wasser, {saltAmount} Salz, etwas Mehl und die Mini-Menge {yeastAmount} Hefe verrühren.",
+      "{waterAmount} kaltes Wasser, {saltAmount} Salz, etwas Mehl und {yeastAmount} Hefe verrühren.",
     "steps.weizen.72h.1.title": "Teig mischen",
     "steps.weizen.72h.1.text":
       "Rest Mehl + {oilAmount} Öl dazu. Nur 1-2 Minuten auf niedrigster Stufe mischen.",
@@ -265,7 +265,7 @@ export const messages = {
       "Take it out of the fridge {duration} before baking. Divide into balls, shape them round, and let rise at room temperature. If bulk fermentation was only 16 hours, stretch this proof to about 4.5 hours so the core warms through; if it was 48 hours, reduce it to a maximum of 3 hours.",
     "steps.weizen.72h.0.title": "Dissolve the yeast",
     "steps.weizen.72h.0.text":
-      "Stir {waterAmount} cold water, {saltAmount} salt, a bit of flour and the tiny amount of {yeastAmount} yeast together.",
+      "Stir {waterAmount} cold water, {saltAmount} salt, a bit of flour and {yeastAmount} yeast together.",
     "steps.weizen.72h.1.title": "Mix the dough",
     "steps.weizen.72h.1.text":
       "Add the rest of the flour plus {oilAmount} oil. Mix on the lowest setting for only 1-2 minutes.",
