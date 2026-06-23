@@ -44,6 +44,11 @@ export const App = () => {
   );
   const setWaitMinutesOverride = useProgressStore((state) => state.setWaitMinutesOverride);
   const bakeAt = useProgressStore((state) => state.bakeAt[recipeKey]);
+  const adjustableStepProgress = useProgressStore((state) =>
+    adjustableStepIndex === undefined ? undefined : state.progress[recipeKey]?.[adjustableStepIndex],
+  );
+  const longRiseStarted =
+    adjustableStepProgress?.startedAt !== undefined || adjustableStepProgress?.done === true;
 
   const riseMinutes =
     adjustableBaseMinutes === undefined ? undefined : riseMinutesOverride ?? adjustableBaseMinutes;
@@ -98,7 +103,7 @@ export const App = () => {
           gehzeit={gehzeit}
           pizzen={pizzen}
           riseMinutes={riseMinutes}
-          riseMinutesDisabled={bakeAt !== undefined}
+          riseMinutesDisabled={bakeAt !== undefined && longRiseStarted}
           onMehlartChange={setMehlart}
           onGehzeitChange={setGehzeit}
           onPizzenChange={setPizzen}
