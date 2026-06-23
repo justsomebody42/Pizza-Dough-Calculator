@@ -1,6 +1,5 @@
-import { Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import StopIcon from "@mui/icons-material/Stop";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { formatClockLabel } from "../dateFormat";
@@ -10,22 +9,18 @@ import { ConfirmDialog } from "./ConfirmDialog";
 
 export const StepTimer: React.FC<{
   readonly waitMinutes: number;
-  readonly startedAt: number | undefined;
+  readonly startedAt: number;
   readonly notified: boolean;
   readonly stepTitle: string;
-  readonly onStart: () => void;
+  readonly onStop: () => void;
   readonly onNotified: () => void;
-}> = ({ waitMinutes, startedAt, notified, stepTitle, onStart, onNotified }) => {
+}> = ({ waitMinutes, startedAt, notified, stepTitle, onStop, onNotified }) => {
   const { formatMessage } = useIntl();
   const locale = useConfigStore((state) => state.locale);
   const [now, setNow] = useState(() => Date.now());
-  const [restartOpen, setRestartOpen] = useState(false);
+  const [stopOpen, setStopOpen] = useState(false);
 
   useEffect(() => {
-    if (startedAt === undefined) {
-      return;
-    }
-
     const tick = () => setNow(Date.now());
     tick();
     const interval = setInterval(tick, 1000);
@@ -37,11 +32,11 @@ export const StepTimer: React.FC<{
     };
   }, [startedAt]);
 
-  const target = startedAt === undefined ? undefined : startedAt + waitMinutes * 60_000;
-  const remainingMs = target === undefined ? undefined : target - now;
+  const target = startedAt + waitMinutes * 60_000;
+  const remainingMs = target - now;
 
   useEffect(() => {
-    if (remainingMs === undefined || remainingMs > 0 || notified) {
+    if (remainingMs > 0 || notified) {
       return;
     }
 
@@ -54,29 +49,7 @@ export const StepTimer: React.FC<{
     onNotified();
   }, [remainingMs, notified, stepTitle, formatMessage, onNotified]);
 
-  const handleStart = () => {
-    if (typeof Notification !== "undefined" && Notification.permission === "default") {
-      void Notification.requestPermission();
-    }
-
-    onStart();
-  };
-
-  if (startedAt === undefined) {
-    return (
-      <Button
-        size="small"
-        variant="outlined"
-        startIcon={<PlayArrowIcon />}
-        onClick={handleStart}
-        sx={{ mt: 0.5, color: colors.accent, borderColor: colors.accent }}
-      >
-        {formatMessage({ id: "progress.start" })}
-      </Button>
-    );
-  }
-
-  if (remainingMs !== undefined && remainingMs <= 0) {
+  if (remainingMs <= 0) {
     return (
       <Typography variant="body2" sx={{ color: colors.accent, fontWeight: "bold", mt: 0.5 }}>
         {formatMessage({ id: "progress.ready" })}
@@ -84,10 +57,8 @@ export const StepTimer: React.FC<{
     );
   }
 
-  const targetDate = new Date(target as number);
-  const timeLabel = formatClockLabel(targetDate, locale, now);
-
-  const totalSecondsLeft = Math.max(0, Math.ceil((remainingMs as number) / 1000));
+  const timeLabel = formatClockLabel(new Date(target), locale, now);
+  const totalSecondsLeft = Math.max(0, Math.ceil(remainingMs / 1000));
   const hours = Math.floor(totalSecondsLeft / 3600);
   const minutes = Math.floor((totalSecondsLeft % 3600) / 60);
   const seconds = totalSecondsLeft % 60;
@@ -98,14 +69,14 @@ export const StepTimer: React.FC<{
         <Typography variant="body2" sx={{ color: colors.water }}>
           {formatMessage({ id: "progress.remainingWithSeconds" }, { hours, minutes, seconds })}
         </Typography>
-        <Tooltip title={formatMessage({ id: "progress.restart" })}>
+        <Tooltip title={formatMessage({ id: "progress.stop" })}>
           <IconButton
             size="small"
-            onClick={() => setRestartOpen(true)}
-            aria-label={formatMessage({ id: "progress.restart" })}
+            onClick={() => setStopOpen(true)}
+            aria-label={formatMessage({ id: "progress.stop" })}
             sx={{ color: colors.textMuted, p: 0.25 }}
           >
-            <RestartAltIcon fontSize="inherit" />
+            <StopIcon fontSize="inherit" />
           </IconButton>
         </Tooltip>
       </Box>
@@ -113,12 +84,12 @@ export const StepTimer: React.FC<{
         {formatMessage({ id: "progress.readyAt" }, { time: timeLabel })}
       </Typography>
       <ConfirmDialog
-        open={restartOpen}
-        titleId="progress.restartTitle"
-        bodyId="progress.restartBody"
-        confirmId="progress.restartConfirm"
-        onClose={() => setRestartOpen(false)}
-        onConfirm={handleStart}
+        open={stopOpen}
+        titleId="progress.stopTitle"
+        bodyId="progress.stopBody"
+        confirmId="progress.stopConfirm"
+        onClose={() => setStopOpen(false)}
+        onConfirm={onStop}
       />
     </Box>
   );

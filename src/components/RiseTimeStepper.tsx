@@ -1,17 +1,20 @@
 import { Button, ButtonGroup } from "@mui/material";
-import { formatHoursLabel } from "../dateFormat";
+import { useIntl } from "react-intl";
+import { getDurationLabel } from "../durationLabel";
 import { useConfigStore } from "../store";
 import { colors, inputHeight } from "../styles";
 
-const STEP_MINUTES = 60;
-const MIN_MINUTES = 30;
+const DEFAULT_STEP_MINUTES = 60;
+const DEFAULT_MIN_MINUTES = 30;
 
 export const RiseTimeStepper: React.FC<{
   readonly value: number;
   readonly onChange: (value: number) => void;
-  readonly disabled?: boolean;
-}> = ({ value, onChange, disabled = false }) => {
+  readonly stepMinutes?: number;
+  readonly minMinutes?: number;
+}> = ({ value, onChange, stepMinutes = DEFAULT_STEP_MINUTES, minMinutes = DEFAULT_MIN_MINUTES }) => {
   const locale = useConfigStore((state) => state.locale);
+  const { formatMessage } = useIntl();
 
   return (
     <ButtonGroup
@@ -20,8 +23,7 @@ export const RiseTimeStepper: React.FC<{
       sx={{ bgcolor: colors.panelBg, overflow: "hidden" }}
     >
       <Button
-        disabled={disabled}
-        onClick={() => onChange(Math.max(MIN_MINUTES, value - STEP_MINUTES))}
+        onClick={() => onChange(Math.max(minMinutes, value - stepMinutes))}
         sx={{ color: colors.textMuted, height: inputHeight, borderColor: colors.inputBorder }}
       >
         -
@@ -34,11 +36,10 @@ export const RiseTimeStepper: React.FC<{
           height: inputHeight,
         }}
       >
-        {formatHoursLabel(value, locale)}
+        {getDurationLabel(value, locale, formatMessage)}
       </Button>
       <Button
-        disabled={disabled}
-        onClick={() => onChange(value + STEP_MINUTES)}
+        onClick={() => onChange(value + stepMinutes)}
         sx={{ color: colors.textMuted, height: inputHeight, borderColor: colors.inputBorder }}
       >
         +

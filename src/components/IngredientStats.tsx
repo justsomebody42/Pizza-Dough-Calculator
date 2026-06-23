@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import { FormattedMessage, useIntl } from "react-intl";
 import type { CalcValues } from "../calc";
 import type { MessageKey } from "../i18n/messages";
@@ -24,41 +24,42 @@ export const IngredientStats: React.FC<{
   return (
     <Card sx={cardSx}>
       <CardContent>
-        <Grid container spacing={2}>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
           {STATS.map((stat) => (
-            <Grid size={{ lg: 2, md: 4, sm: 6, xs: 12 }} key={stat.key}>
-              <Box
+            <Box
+              key={stat.key}
+              sx={{
+                flex: "1 1 0",
+                minWidth: { xs: "100%", sm: "36%", md: "26%", lg: "14%" },
+                bgcolor: colors.panelBg,
+                border: `1px solid ${colors.border}`,
+                p: 1.5,
+                borderRadius: 2,
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                variant="caption"
                 sx={{
-                  bgcolor: colors.panelBg,
-                  border: `1px solid ${colors.border}`,
-                  p: 1.5,
-                  borderRadius: 2,
-                  textAlign: "center",
+                  color: colors.textMuted,
+                  display: "block",
+                  textTransform: "uppercase",
                 }}
               >
-                <Typography
-                  variant="caption"
-                  sx={{
-                    color: colors.textMuted,
-                    display: "block",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  <FormattedMessage id={stat.messageId} />
-                </Typography>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: "bold", color: stat.color, mt: 0.5 }}
-                >
-                  {formatMessage(
-                    { id: "stats.unit.gram" },
-                    { value: calcValues[stat.key] },
-                  )}
-                </Typography>
-              </Box>
-            </Grid>
+                <FormattedMessage id={stat.messageId} />
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: "bold", color: stat.color, mt: 0.5 }}
+              >
+                {formatMessage(
+                  { id: "stats.unit.gram" },
+                  { value: calcValues[stat.key] },
+                )}
+              </Typography>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </CardContent>
     </Card>
   );

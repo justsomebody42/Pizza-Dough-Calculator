@@ -14,8 +14,10 @@ interface ProgressState {
   readonly bakeAt: Record<string, number>;
   readonly toggleStep: (recipeKey: string, stepIndex: number) => void;
   readonly startTimer: (recipeKey: string, stepIndex: number) => void;
+  readonly stopTimer: (recipeKey: string, stepIndex: number) => void;
   readonly markNotified: (recipeKey: string, stepIndex: number) => void;
   readonly setWaitMinutesOverride: (recipeKey: string, stepIndex: number, minutes: number) => void;
+  readonly resetWaitMinutesOverride: (recipeKey: string, stepIndex: number) => void;
   readonly setBakeAt: (recipeKey: string, timestamp: number) => void;
   readonly clearBakeAt: (recipeKey: string) => void;
   readonly resetRecipe: (recipeKey: string) => void;
@@ -57,6 +59,24 @@ export const useProgressStore = create<ProgressState>()(
             },
           };
         }),
+      stopTimer: (recipeKey, stepIndex) =>
+        set((state) => {
+          const recipeProgress = state.progress[recipeKey] ?? {};
+          const entry = recipeProgress[stepIndex];
+          if (!entry) {
+            return state;
+          }
+
+          return {
+            progress: {
+              ...state.progress,
+              [recipeKey]: {
+                ...recipeProgress,
+                [stepIndex]: { ...entry, startedAt: undefined, notified: false },
+              },
+            },
+          };
+        }),
       markNotified: (recipeKey, stepIndex) =>
         set((state) => {
           const recipeProgress = state.progress[recipeKey] ?? {};
@@ -90,6 +110,24 @@ export const useProgressStore = create<ProgressState>()(
                   done: entry?.done ?? false,
                   waitMinutesOverride: minutes,
                 },
+              },
+            },
+          };
+        }),
+      resetWaitMinutesOverride: (recipeKey, stepIndex) =>
+        set((state) => {
+          const recipeProgress = state.progress[recipeKey] ?? {};
+          const entry = recipeProgress[stepIndex];
+          if (!entry) {
+            return state;
+          }
+
+          return {
+            progress: {
+              ...state.progress,
+              [recipeKey]: {
+                ...recipeProgress,
+                [stepIndex]: { ...entry, waitMinutesOverride: undefined },
               },
             },
           };

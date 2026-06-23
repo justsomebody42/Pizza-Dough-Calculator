@@ -9,24 +9,6 @@ export interface RecipeStep {
   readonly waitMinutes?: number;
 }
 
-// The step with the longest wait is the one users want to shorten/extend
-// (cold ferment, or the final pre-bake rest for the quick recipes). On a
-// tie, the later step wins since it's the one closer to the actual bake.
-export const getAdjustableStepIndex = (steps: readonly RecipeStep[]): number | undefined => {
-  let bestIndex: number | undefined;
-  let bestMinutes = 0;
-
-  steps.forEach((step, index) => {
-    const minutes = step.waitMinutes ?? 0;
-    if (minutes > 0 && minutes >= bestMinutes) {
-      bestMinutes = minutes;
-      bestIndex = index;
-    }
-  });
-
-  return bestIndex;
-};
-
 export interface AvailableRecipe {
   readonly available: true;
   readonly mehlTipp: readonly string[];

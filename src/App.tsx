@@ -2,15 +2,13 @@ import { Box, Container, Paper, Typography } from "@mui/material";
 import { useMemo } from "react";
 import { FormattedMessage } from "react-intl";
 import { calculateIngredients } from "./calc";
-import { FlourTips } from "./components/FlourTips";
 import { Footer } from "./components/Footer";
 import { IngredientStats } from "./components/IngredientStats";
 import { LanguageSelect } from "./components/LanguageSelect";
 import { RecipeConfigForm } from "./components/RecipeConfigForm";
 import { RecipeSteps } from "./components/RecipeSteps";
 import { UnavailableAlert } from "./components/UnavailableAlert";
-import { useProgressStore } from "./progressStore";
-import { getAdjustableStepIndex, recipesData } from "./recipesData";
+import { recipesData } from "./recipesData";
 import { useConfigStore } from "./store";
 import { colors } from "./styles";
 
@@ -28,30 +26,6 @@ export const App = () => {
 
   const recipe = recipesData[mehlart][gehzeit];
   const recipeKey = `${mehlart}-${gehzeit}`;
-
-  const adjustableStepIndex = recipe.available
-    ? getAdjustableStepIndex(recipe.steps)
-    : undefined;
-  const adjustableBaseMinutes =
-    recipe.available && adjustableStepIndex !== undefined
-      ? recipe.steps[adjustableStepIndex].waitMinutes ?? 0
-      : undefined;
-
-  const riseMinutesOverride = useProgressStore((state) =>
-    adjustableStepIndex === undefined
-      ? undefined
-      : state.progress[recipeKey]?.[adjustableStepIndex]?.waitMinutesOverride,
-  );
-  const setWaitMinutesOverride = useProgressStore((state) => state.setWaitMinutesOverride);
-  const bakeAt = useProgressStore((state) => state.bakeAt[recipeKey]);
-  const adjustableStepProgress = useProgressStore((state) =>
-    adjustableStepIndex === undefined ? undefined : state.progress[recipeKey]?.[adjustableStepIndex],
-  );
-  const longRiseStarted =
-    adjustableStepProgress?.startedAt !== undefined || adjustableStepProgress?.done === true;
-
-  const riseMinutes =
-    adjustableBaseMinutes === undefined ? undefined : riseMinutesOverride ?? adjustableBaseMinutes;
 
   const calcValues = useMemo(
     () => (recipe.available ? calculateIngredients(recipe, pizzen) : null),
@@ -102,22 +76,16 @@ export const App = () => {
           mehlart={mehlart}
           gehzeit={gehzeit}
           pizzen={pizzen}
-          riseMinutes={riseMinutes}
-          riseMinutesDisabled={bakeAt !== undefined && longRiseStarted}
+          flourTips={recipe.mehlTipp}
+          steps={recipe.available ? recipe.steps : undefined}
           onMehlartChange={setMehlart}
           onGehzeitChange={setGehzeit}
           onPizzenChange={setPizzen}
-          onRiseMinutesChange={(minutes) => {
-            if (adjustableStepIndex !== undefined) {
-              setWaitMinutesOverride(recipeKey, adjustableStepIndex, minutes);
-            }
-          }}
         />
 
         {recipe.available && calcValues ? (
           <Box>
             <IngredientStats calcValues={calcValues} />
-            <FlourTips tips={recipe.mehlTipp} />
             <RecipeSteps
               steps={recipe.steps}
               calcValues={calcValues}
