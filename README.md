@@ -23,10 +23,14 @@ The recipies are based on various recipies I tried and are a combination of what
 
 ![Screenshot](screenshot.png)
 
+## Contributing
+
+Contributions are welcome! Feel free to share ideas or report bugs via [issues](https://github.com/justsomebody42/Pizza-Dough-Calculator/issues), and pull requests are welcome as well.
+
 ## AI disclaimer
 
 AI tools were used to assist during the development.
 
 ## License
 
-Licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). You're free to use, modify, and share this project for noncommercial purposes (personal, educational, hobby, etc.). Commercial use requires a separate agreement.
+Licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). You're free to use, modify, and share this project for noncommercial purposes (personal, educational, hobby, etc.), as long as you keep the required copyright notice (see [LICENSE](LICENSE)). Commercial use requires a separate agreement.

@@ -24,8 +24,6 @@ export const messages = {
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
     "progress.start": "Timer starten",
-    "progress.remaining":
-      "Noch {hours} Std. {minutes} Min. bis zum Start ({time})",
     "progress.remainingWithSeconds":
       "Noch {hours} Std. {minutes} Min. {seconds} Sek.",
     "progress.readyAt": "Fertig: {time}",
@@ -39,18 +37,26 @@ export const messages = {
     "progress.agoDaysHours":
       "vor {days, plural, one {1 Tag} other {{days} Tagen}} und {hours, plural, one {1 Stunde} other {{hours} Stunden}}",
     "progress.bakeAt": "Pizza backen um …",
-    "progress.bakeAtSet": "Teig fertig: {time}",
+    "progress.bakeAtSetWeekday": "{weekday} den {date}",
+    "progress.bakeAtSetTime": "um {time} Uhr",
     "progress.bakeAtConfirm": "Übernehmen",
     "progress.bakeAtTooSoon":
-      "Dafür reicht die Zeit nicht – wähle einen späteren Zeitpunkt.",
+      "Dafür reicht die Zeit nicht - wähle einen späteren Zeitpunkt.",
     "progress.clearBakeAt": "Backzeitpunkt entfernen",
     "progress.clearBakeAtTitle": "Backzeitpunkt entfernen?",
     "progress.clearBakeAtBody":
       "Der geplante Backzeitpunkt und der zugehörige Timer werden entfernt.",
     "progress.clearBakeAtConfirm": "Entfernen",
-    "progress.totalDuration":
-      "Gesamtzeit: {days} Tg. {hours} Std. {minutes} Min.",
-    "progress.startNow": "Jetzt starten!",
+    "progress.addToCalendar": "Zum Kalender hinzufügen",
+    "progress.calendarEventTitle": "Pizzateig ansetzen",
+    "progress.calendarEventDescription":
+      "Teig für {mehlart} ({gehzeit}) jetzt ansetzen, damit er pünktlich um {time} Uhr am {weekday} den {date} fertig zum Backen ist.",
+    "progress.totalDurationOnly":
+      "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min.",
+    "progress.totalDurationStart":
+      "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min. Du musst ihn am <highlightStart>{startWeekday}, den {startDate} um {startTime} Uhr</highlightStart> starten, damit er am <highlightReady>{readyWeekday}, den {readyDate} um {readyTime} Uhr</highlightReady> fertig zum Backen ist.",
+    "progress.totalDurationStartNow":
+      "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min. Du musst ihn jetzt starten, damit er am <highlightReady>{readyWeekday}, den {readyDate} um {readyTime} Uhr</highlightReady> fertig zum Backen ist.",
     "progress.stepStartAt": "Start: {time}",
     "progress.projectedReadyAt": "Voraussichtlich fertig: {time}",
     "progress.resetWaitMinutes": "Auf empfohlene Dauer zurücksetzen",
@@ -147,7 +153,7 @@ export const messages = {
       "{flourAmount} Mehl, {waterAmount} Wasser, {saltAmount} Salz, {oilAmount} Öl und {yeastAmount} Hefe kräftig zu einer homogenen, pastösen Masse verrühren. Kein Gluten = keine Struktur zerstörbar.",
     "steps.glutenfrei.express.1.title": "Direkte Stückgare",
     "steps.glutenfrei.express.1.text":
-      "Mit geölten Händen Teiglinge direkt auf Backpapier formen und {duration} ruhen lassen. Danach direkt in den Ofen. Im Bereich von 1 bis 1,5 Stunden bleiben – mehr oder weniger verschlechtert die Konsistenz.",
+      "Mit geölten Händen Teiglinge direkt auf Backpapier formen und {duration} ruhen lassen. Danach direkt in den Ofen. Im Bereich von 1 bis 1,5 Stunden bleiben - mehr oder weniger verschlechtert die Konsistenz.",
     "steps.glutenfrei.24h.0.title": "Teig mischen",
     "steps.glutenfrei.24h.0.text":
       "{flourAmount} Mehl und {saltAmount} Salz vermischen, {yeastAmount} Hefe und eine Prise Zucker in {waterAmount} Wasser auflösen und unterrühren. Mit den Händen ca. 5 Minuten kneten, {oilAmount} Öl einarbeiten und weitere 5 Minuten kneten - der Teig ist klebrig, Hände dabei leicht befeuchten.",
@@ -186,8 +192,6 @@ export const messages = {
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
     "progress.start": "Start timer",
-    "progress.remaining":
-      "{hours}h {minutes}m until you need to start ({time})",
     "progress.remainingWithSeconds": "{hours}h {minutes}m {seconds}s left",
     "progress.readyAt": "Ready: {time}",
     "progress.ready": "Ready!",
@@ -200,17 +204,26 @@ export const messages = {
     "progress.agoDaysHours":
       "{days, plural, one {1 day} other {{days} days}} and {hours, plural, one {1 hour} other {{hours} hours}} ago",
     "progress.bakeAt": "Bake pizza at …",
-    "progress.bakeAtSet": "Dough ready: {time}",
+    "progress.bakeAtSetWeekday": "{weekday}, {date}",
+    "progress.bakeAtSetTime": "at {time}",
     "progress.bakeAtConfirm": "Set",
     "progress.bakeAtTooSoon":
-      "Not enough time for this dough – choose a later time.",
+      "Not enough time for this dough - choose a later time.",
     "progress.clearBakeAt": "Clear bake time",
     "progress.clearBakeAtTitle": "Clear the bake time?",
     "progress.clearBakeAtBody":
       "This will remove the scheduled bake time and its timer.",
     "progress.clearBakeAtConfirm": "Clear",
-    "progress.totalDuration": "Total time: {days}d {hours}h {minutes}m",
-    "progress.startNow": "Start now!",
+    "progress.addToCalendar": "Add to calendar",
+    "progress.calendarEventTitle": "Start the pizza dough",
+    "progress.calendarEventDescription":
+      "Start the {mehlart} dough ({gehzeit}) now so it's ready to bake by {time} on {weekday}, {date}.",
+    "progress.totalDurationOnly":
+      "The dough will take {days}d {hours}h {minutes}m in total.",
+    "progress.totalDurationStart":
+      "The dough will take {days}d {hours}h {minutes}m in total. You need to start it on <highlightStart>{startWeekday}, {startDate} at {startTime}</highlightStart> so that it's ready to bake on <highlightReady>{readyWeekday}, {readyDate} at {readyTime}</highlightReady>.",
+    "progress.totalDurationStartNow":
+      "The dough will take {days}d {hours}h {minutes}m in total. You need to start it now so that it's ready to bake on <highlightReady>{readyWeekday}, {readyDate} at {readyTime}</highlightReady>.",
     "progress.stepStartAt": "Start: {time}",
     "progress.projectedReadyAt": "Likely ready: {time}",
     "progress.resetWaitMinutes": "Reset to recommended duration",

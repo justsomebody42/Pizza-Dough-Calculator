@@ -18,3 +18,12 @@ export const formatClockLabel = (date: Date, locale: Locale, now: number = Date.
 
   return `${weekday} ${time}`;
 };
+
+export const formatFullDateTimeParts = (
+  date: Date,
+  locale: Locale,
+): { time: string; weekday: string; date: string } => ({
+  time: new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" }).format(date),
+  weekday: new Intl.DateTimeFormat(locale, { weekday: "long" }).format(date),
+  date: new Intl.DateTimeFormat(locale, { day: "2-digit", month: "2-digit", year: "numeric" }).format(date),
+});

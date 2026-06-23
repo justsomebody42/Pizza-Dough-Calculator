@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added downloadable calendar item as reminder to start the dough
 - Added CHANGELOG
 
 ## v1.2.0

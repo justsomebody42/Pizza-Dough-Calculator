@@ -1,3 +1,4 @@
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutlined";
 import EventIcon from "@mui/icons-material/Event";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -12,9 +13,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { formatClockLabel } from "../dateFormat";
+import { formatFullDateTimeParts } from "../dateFormat";
+import { downloadIcsReminder } from "../ics";
 import { useProgressStore } from "../progressStore";
 import {
   GEHZEIT_OPTIONS,
@@ -90,13 +93,105 @@ export const RecipeConfigForm: React.FC<{
     bakeAt === undefined ? undefined : bakeAt - totalWaitMinutes * 60_000;
   const remainingMs = startAt === undefined ? undefined : startAt - now;
 
-  const bakeButtonLabel =
+  const startParts =
+    startAt === undefined
+      ? undefined
+      : formatFullDateTimeParts(new Date(startAt), locale);
+  const readyParts =
     bakeAt === undefined
+      ? undefined
+      : formatFullDateTimeParts(new Date(bakeAt), locale);
+
+  const renderHighlight = (chunks: ReactNode): ReactNode => (
+    <Box component="span" sx={{ fontWeight: 700, color: "text.primary" }}>
+      {chunks}
+    </Box>
+  );
+
+  const bakeButtonLabel =
+    readyParts === undefined
       ? formatMessage({ id: "progress.bakeAt" })
-      : formatMessage(
-          { id: "progress.bakeAtSet" },
-          { time: formatClockLabel(new Date(bakeAt), locale, now) },
-        );
+      : undefined;
+  const bakeButtonWeekdayLabel =
+    readyParts === undefined
+      ? undefined
+      : formatMessage({ id: "progress.bakeAtSetWeekday" }, readyParts);
+  const bakeButtonTimeLabel =
+    readyParts === undefined
+      ? undefined
+      : formatMessage({ id: "progress.bakeAtSetTime" }, readyParts);
+
+  let durationCaption: ReactNode = (
+    <FormattedMessage
+      id="progress.totalDurationOnly"
+      values={{ days: totalDays, hours: totalHours, minutes: totalMinutes }}
+    />
+  );
+
+  if (remainingMs !== undefined && readyParts !== undefined) {
+    durationCaption =
+      remainingMs <= 0 ? (
+        <FormattedMessage
+          id="progress.totalDurationStartNow"
+          values={{
+            days: totalDays,
+            hours: totalHours,
+            minutes: totalMinutes,
+            readyWeekday: readyParts.weekday,
+            readyDate: readyParts.date,
+            readyTime: readyParts.time,
+            highlightReady: renderHighlight,
+          }}
+        />
+      ) : (
+        <FormattedMessage
+          id="progress.totalDurationStart"
+          values={{
+            days: totalDays,
+            hours: totalHours,
+            minutes: totalMinutes,
+            startWeekday: startParts?.weekday,
+            startDate: startParts?.date,
+            startTime: startParts?.time,
+            readyWeekday: readyParts.weekday,
+            readyDate: readyParts.date,
+            readyTime: readyParts.time,
+            highlightStart: renderHighlight,
+            highlightReady: renderHighlight,
+          }}
+        />
+      );
+  }
+
+  const handleAddToCalendar = () => {
+    if (startAt === undefined || readyParts === undefined) {
+      return;
+    }
+
+    const mehlartLabel = formatMessage({
+      id: MEHLART_OPTIONS.find((option) => option.value === mehlart)!
+        .messageId,
+    });
+    const gehzeitLabel = formatMessage({
+      id: GEHZEIT_OPTIONS.find((option) => option.value === gehzeit)!
+        .messageId,
+    });
+
+    void downloadIcsReminder({
+      filename: "pizza-teig-start.ics",
+      title: formatMessage({ id: "progress.calendarEventTitle" }),
+      description: formatMessage(
+        { id: "progress.calendarEventDescription" },
+        {
+          mehlart: mehlartLabel,
+          gehzeit: gehzeitLabel,
+          ...readyParts,
+        },
+      ),
+      start: new Date(startAt),
+      durationMinutes: 15,
+    });
+  };
 
   return (
     <Card>
@@ -172,9 +267,26 @@ export const RecipeConfigForm: React.FC<{
                   color: "primary.main",
                   borderColor: "primary.main",
                   height: theme.inputHeight,
+                  py: 0,
                 }}
               >
-                {bakeButtonLabel}
+                {readyParts === undefined ? (
+                  bakeButtonLabel
+                ) : (
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                      lineHeight: 1.1,
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    <Box component="span">{bakeButtonWeekdayLabel}</Box>
+                    <Box component="span">{bakeButtonTimeLabel}</Box>
+                  </Box>
+                )}
               </Button>
             </Grid>
           )}
@@ -190,31 +302,20 @@ export const RecipeConfigForm: React.FC<{
             }}
           >
             <Typography variant="caption" sx={{ color: "text.secondary" }}>
-              {formatMessage(
-                { id: "progress.totalDuration" },
-                { days: totalDays, hours: totalHours, minutes: totalMinutes },
-              )}
-              {startAt !== undefined &&
-                remainingMs !== undefined &&
-                ` ${
-                  remainingMs <= 0
-                    ? formatMessage({ id: "progress.startNow" })
-                    : formatMessage(
-                        { id: "progress.remaining" },
-                        {
-                          hours: Math.floor(
-                            Math.ceil(remainingMs / 60_000) / 60,
-                          ),
-                          minutes: Math.ceil(remainingMs / 60_000) % 60,
-                          time: formatClockLabel(
-                            new Date(startAt),
-                            locale,
-                            now,
-                          ),
-                        },
-                      )
-                }`}
+              {durationCaption}
             </Typography>
+            {startAt !== undefined && remainingMs !== undefined && (
+              <Tooltip title={formatMessage({ id: "progress.addToCalendar" })}>
+                <IconButton
+                  size="small"
+                  onClick={handleAddToCalendar}
+                  aria-label={formatMessage({ id: "progress.addToCalendar" })}
+                  sx={{ color: "text.secondary", p: 0.25 }}
+                >
+                  <CalendarMonthOutlinedIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+            )}
             {startAt !== undefined && remainingMs !== undefined && (
               <Tooltip title={formatMessage({ id: "progress.clearBakeAt" })}>
                 <IconButton
