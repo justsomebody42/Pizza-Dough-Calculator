@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { formatClockLabel } from "../dateFormat";
 import { useConfigStore } from "../store";
-import { colors } from "../styles";
 import { ConfirmDialog } from "./ConfirmDialog";
 
 export const StepTimer: React.FC<{
@@ -51,7 +50,7 @@ export const StepTimer: React.FC<{
 
   if (remainingMs <= 0) {
     return (
-      <Typography variant="body2" sx={{ color: colors.accent, fontWeight: "bold", mt: 0.5 }}>
+      <Typography variant="body2" sx={{ color: "primary.main", fontWeight: "bold", mt: 0.5 }}>
         {formatMessage({ id: "progress.ready" })}
       </Typography>
     );
@@ -66,7 +65,7 @@ export const StepTimer: React.FC<{
   return (
     <Box sx={{ mt: 0.5 }}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-        <Typography variant="body2" sx={{ color: colors.water }}>
+        <Typography variant="body2" sx={{ color: "custom.water" }}>
           {formatMessage({ id: "progress.remainingWithSeconds" }, { hours, minutes, seconds })}
         </Typography>
         <Tooltip title={formatMessage({ id: "progress.stop" })}>
@@ -74,13 +73,13 @@ export const StepTimer: React.FC<{
             size="small"
             onClick={() => setStopOpen(true)}
             aria-label={formatMessage({ id: "progress.stop" })}
-            sx={{ color: colors.textMuted, p: 0.25 }}
+            sx={{ color: "text.secondary", p: 0.25 }}
           >
             <StopIcon fontSize="inherit" />
           </IconButton>
         </Tooltip>
       </Box>
-      <Typography variant="caption" sx={{ color: colors.textMuted }}>
+      <Typography variant="caption" sx={{ color: "text.secondary" }}>
         {formatMessage({ id: "progress.readyAt" }, { time: timeLabel })}
       </Typography>
       <ConfirmDialog

@@ -2,8 +2,6 @@ import { Box, Link, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { FormattedMessage } from "react-intl";
-import { colors } from "../styles";
-
 const repoUrl = "https://github.com/justsomebody42/Pizza-Dough-Calculator";
 
 export const Footer = () => (
@@ -11,7 +9,7 @@ export const Footer = () => (
     <Typography
       variant="caption"
       sx={{
-        color: colors.textMuted,
+        color: "text.secondary",
         display: "inline-flex",
         alignItems: "center",
         gap: 0.75,
@@ -22,7 +20,7 @@ export const Footer = () => (
         target="_blank"
         rel="noopener noreferrer"
         sx={{
-          color: colors.textMuted,
+          color: "text.secondary",
           display: "inline-flex",
           alignItems: "center",
           gap: 0.5,

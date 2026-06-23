@@ -11,7 +11,6 @@ import { useProgressStore } from "../progressStore";
 import type { RecipeStep } from "../recipesData";
 import { getEffectiveWaitMinutes, getTotalWaitMinutes } from "../scheduleUtils";
 import { useConfigStore } from "../store";
-import { cardSx, colors } from "../styles";
 import { CompletedAt } from "./CompletedAt";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { RiseTimeStepper } from "./RiseTimeStepper";
@@ -105,7 +104,7 @@ export const RecipeSteps: React.FC<{
   const firstStepDone = recipeProgress?.[0]?.done ?? false;
 
   return (
-    <Card sx={cardSx}>
+    <Card>
       <CardContent>
         <Box
           sx={{
@@ -124,8 +123,8 @@ export const RecipeSteps: React.FC<{
                 sx={{
                   color:
                     bakeAt !== undefined && projectedReadyAt > bakeAt + 60_000
-                      ? colors.accent
-                      : colors.textMuted,
+                      ? "primary.main"
+                      : "text.secondary",
                 }}
               >
                 {formatMessage(
@@ -140,7 +139,7 @@ export const RecipeSteps: React.FC<{
               size="small"
               startIcon={<RestartAltIcon />}
               onClick={() => setResetOpen(true)}
-              sx={{ color: colors.textMuted, order: { xs: 0, md: 2 } }}
+              sx={{ color: "text.secondary", order: { xs: 0, md: 2 } }}
             >
               <FormattedMessage id="progress.newDough" defaultMessage="Start new dough" />
             </Button>
@@ -163,21 +162,30 @@ export const RecipeSteps: React.FC<{
             return (
               <Box
                 key={step.titleId}
-                className="step-box"
-                sx={{ display: "flex", alignItems: "flex-start", opacity: done ? 0.5 : 1 }}
+                sx={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  opacity: done ? 0.5 : 1,
+                  bgcolor: "custom.panel",
+                  p: "12px 16px",
+                  borderRadius: "8px",
+                  mb: "12px",
+                  borderLeft: "4px solid",
+                  borderLeftColor: "primary.main",
+                }}
               >
                 <Checkbox
                   checked={done}
                   disabled={checkboxDisabled}
                   onChange={() => toggleStep(recipeKey, index)}
-                  sx={{ color: colors.textMuted, p: 0.5, mt: -0.25 }}
+                  sx={{ color: "text.secondary", p: 0.5, mt: -0.25 }}
                 />
                 <Box sx={{ flex: 1, pt: 0.5 }}>
                   <Typography
                     variant="subtitle2"
                     sx={{
                       fontWeight: "bold",
-                      color: colors.heading,
+                      color: "custom.heading",
                       textDecoration: done ? "line-through" : "none",
                     }}
                   >
@@ -187,13 +195,13 @@ export const RecipeSteps: React.FC<{
                     entry?.doneAt !== undefined && <CompletedAt doneAt={entry.doneAt} />
                   ) : (
                     <>
-                      <Typography variant="caption" sx={{ color: colors.textMuted, display: "block" }}>
+                      <Typography variant="caption" sx={{ color: "text.secondary", display: "block" }}>
                         {formatMessage(
                           { id: "progress.stepStartAt" },
                           { time: formatClockLabel(new Date(stepSchedule[index].start), locale, now) },
                         )}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: colors.textMuted, mt: 0.5 }}>
+                      <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5 }}>
                         {formatMessage({ id: step.textId }, textParams)}
                       </Typography>
                       {canAdjustInline && waitMinutes !== undefined && (
@@ -211,7 +219,7 @@ export const RecipeSteps: React.FC<{
                                 size="small"
                                 onClick={() => resetWaitMinutesOverride(recipeKey, index)}
                                 aria-label={formatMessage({ id: "progress.resetWaitMinutes" })}
-                                sx={{ color: colors.textMuted, p: 0.5 }}
+                                sx={{ color: "text.secondary", p: 0.5 }}
                               >
                                 <RestartAltIcon fontSize="small" />
                               </IconButton>
@@ -231,7 +239,7 @@ export const RecipeSteps: React.FC<{
                                 }
                                 startTimer(recipeKey, index);
                               }}
-                              sx={{ color: colors.accent, borderColor: colors.accent }}
+                              sx={{ color: "primary.main", borderColor: "primary.main" }}
                             >
                               {formatMessage({ id: "progress.start" })}
                             </Button>

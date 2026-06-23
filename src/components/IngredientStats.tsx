@@ -2,18 +2,17 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { FormattedMessage, useIntl } from "react-intl";
 import type { CalcValues } from "../calc";
 import type { MessageKey } from "../i18n/messages";
-import { cardSx, colors } from "../styles";
 
 const STATS: ReadonlyArray<{
   readonly key: keyof CalcValues;
   readonly messageId: MessageKey;
   readonly color: string;
 }> = [
-  { key: "mehl", messageId: "stats.mehl", color: colors.text },
-  { key: "wasser", messageId: "stats.wasser", color: colors.water },
-  { key: "salz", messageId: "stats.salz", color: colors.text },
-  { key: "oel", messageId: "stats.oel", color: colors.text },
-  { key: "hefe", messageId: "stats.hefe", color: colors.accent },
+  { key: "mehl", messageId: "stats.mehl", color: "text.primary" },
+  { key: "wasser", messageId: "stats.wasser", color: "custom.water" },
+  { key: "salz", messageId: "stats.salz", color: "text.primary" },
+  { key: "oel", messageId: "stats.oel", color: "text.primary" },
+  { key: "hefe", messageId: "stats.hefe", color: "primary.main" },
 ];
 
 export const IngredientStats: React.FC<{
@@ -22,7 +21,7 @@ export const IngredientStats: React.FC<{
   const { formatMessage } = useIntl();
 
   return (
-    <Card sx={cardSx}>
+    <Card>
       <CardContent>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
           {STATS.map((stat) => (
@@ -31,8 +30,9 @@ export const IngredientStats: React.FC<{
               sx={{
                 flex: "1 1 0",
                 minWidth: { xs: "100%", sm: "36%", md: "26%", lg: "14%" },
-                bgcolor: colors.panelBg,
-                border: `1px solid ${colors.border}`,
+                bgcolor: "custom.panel",
+                border: "1px solid",
+                borderColor: "divider",
                 p: 1.5,
                 borderRadius: 2,
                 textAlign: "center",
@@ -41,7 +41,7 @@ export const IngredientStats: React.FC<{
               <Typography
                 variant="caption"
                 sx={{
-                  color: colors.textMuted,
+                  color: "text.secondary",
                   display: "block",
                   textTransform: "uppercase",
                 }}

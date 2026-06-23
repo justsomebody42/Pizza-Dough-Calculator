@@ -7,10 +7,10 @@ import { IngredientStats } from "./components/IngredientStats";
 import { LanguageSelect } from "./components/LanguageSelect";
 import { RecipeConfigForm } from "./components/RecipeConfigForm";
 import { RecipeSteps } from "./components/RecipeSteps";
+import { ThemeSwitcher } from "./components/ThemeSwitcher";
 import { UnavailableAlert } from "./components/UnavailableAlert";
 import { recipesData } from "./recipesData";
 import { useConfigStore } from "./store";
-import { colors } from "./styles";
 
 export const App = () => {
   const {
@@ -39,8 +39,8 @@ export const App = () => {
         sx={{
           mt: 4,
           p: { xs: 2, sm: 4 },
-          bgcolor: colors.panelBg,
-          color: colors.text,
+          bgcolor: "custom.panel",
+          color: "text.primary",
           borderRadius: 3,
         }}
       >
@@ -57,7 +57,7 @@ export const App = () => {
             variant="h4"
             component="h1"
             sx={{
-              color: colors.accent,
+              color: "primary.main",
               fontWeight: "bold",
               textAlign: "center",
             }}
@@ -67,8 +67,9 @@ export const App = () => {
               defaultMessage="Pizza Teig Rechner"
             />
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 0.5 }}>
             <LanguageSelect value={locale} onChange={setLocale} />
+            <ThemeSwitcher />
           </Box>
         </Box>
 

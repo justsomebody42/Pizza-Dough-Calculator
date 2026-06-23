@@ -69,6 +69,8 @@ export const messages = {
     "progress.notificationBody": "{stepTitle} ist fertig!",
     "language.switchToDe": "Auf Deutsch wechseln",
     "language.switchToEn": "Auf Englisch wechseln",
+    "theme.switchToLight": "Zum hellen Modus wechseln",
+    "theme.switchToDark": "Zum dunklen Modus wechseln",
     "duration.minutes": "{minutes} Minuten",
     "duration.hours":
       "{hours, plural, one {{hoursLabel} Stunde} other {{hoursLabel} Stunden}}",
@@ -226,6 +228,8 @@ export const messages = {
     "progress.notificationBody": "{stepTitle} is ready!",
     "language.switchToDe": "Switch to German",
     "language.switchToEn": "Switch to English",
+    "theme.switchToLight": "Switch to light mode",
+    "theme.switchToDark": "Switch to dark mode",
     "duration.minutes": "{minutes} minutes",
     "duration.hours":
       "{hours, plural, one {{hoursLabel} hour} other {{hoursLabel} hours}}",

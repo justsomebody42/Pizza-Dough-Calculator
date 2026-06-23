@@ -1,7 +1,6 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { useIntl } from "react-intl";
 import type { MessageKey } from "../i18n/messages";
-import { colors, inputHeight } from "../styles";
 
 export const ConfigSelect: React.FC<{
   readonly value: string;
@@ -19,11 +18,10 @@ export const ConfigSelect: React.FC<{
         value={value}
         onChange={(event) => onChange(event.target.value)}
         sx={{
-          color: colors.text,
-          bgcolor: colors.panelBg,
-          height: inputHeight,
+          color: "text.primary",
+          bgcolor: "custom.panel",
           ".MuiOutlinedInput-notchedOutline": {
-            borderColor: colors.inputBorder,
+            borderColor: "custom.inputBorder",
           },
         }}
       >

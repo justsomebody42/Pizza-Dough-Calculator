@@ -11,6 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { formatClockLabel } from "../dateFormat";
@@ -24,7 +25,6 @@ import {
 } from "../recipesData";
 import { getTotalWaitMinutes } from "../scheduleUtils";
 import { useConfigStore } from "../store";
-import { cardSx, colors, inputHeight } from "../styles";
 import { BakeTimeDialog } from "./BakeTimeDialog";
 import { ConfigLabel } from "./ConfigLabel";
 import { ConfigSelect } from "./ConfigSelect";
@@ -52,6 +52,7 @@ export const RecipeConfigForm: React.FC<{
   onPizzenChange,
 }) => {
   const { formatMessage } = useIntl();
+  const theme = useTheme();
   const locale = useConfigStore((state) => state.locale);
   const recipeKey = `${mehlart}-${gehzeit}`;
   const recipeProgress = useProgressStore((state) => state.progress[recipeKey]);
@@ -98,7 +99,7 @@ export const RecipeConfigForm: React.FC<{
         );
 
   return (
-    <Card sx={cardSx}>
+    <Card>
       <CardContent>
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -120,7 +121,7 @@ export const RecipeConfigForm: React.FC<{
                 size="small"
                 onClick={() => setTipsOpen(true)}
                 aria-label={formatMessage({ id: "tips.infoLabel" })}
-                sx={{ color: colors.textMuted }}
+                sx={{ color: "text.secondary" }}
               >
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
@@ -168,9 +169,9 @@ export const RecipeConfigForm: React.FC<{
                 startIcon={<EventIcon />}
                 onClick={() => setPickerOpen(true)}
                 sx={{
-                  color: colors.accent,
-                  borderColor: colors.accent,
-                  height: inputHeight,
+                  color: "primary.main",
+                  borderColor: "primary.main",
+                  height: theme.inputHeight,
                 }}
               >
                 {bakeButtonLabel}
@@ -188,7 +189,7 @@ export const RecipeConfigForm: React.FC<{
               flexWrap: "wrap",
             }}
           >
-            <Typography variant="caption" sx={{ color: colors.textMuted }}>
+            <Typography variant="caption" sx={{ color: "text.secondary" }}>
               {formatMessage(
                 { id: "progress.totalDuration" },
                 { days: totalDays, hours: totalHours, minutes: totalMinutes },
@@ -220,7 +221,7 @@ export const RecipeConfigForm: React.FC<{
                   size="small"
                   onClick={() => setClearOpen(true)}
                   aria-label={formatMessage({ id: "progress.clearBakeAt" })}
-                  sx={{ color: colors.textMuted, p: 0.25 }}
+                  sx={{ color: "text.secondary", p: 0.25 }}
                 >
                   <DeleteOutlineIcon fontSize="inherit" />
                 </IconButton>

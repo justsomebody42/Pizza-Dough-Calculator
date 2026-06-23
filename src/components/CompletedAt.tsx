@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { formatClockLabel } from "../dateFormat";
 import { useConfigStore } from "../store";
-import { colors } from "../styles";
-
 export const CompletedAt: React.FC<{ readonly doneAt: number }> = ({ doneAt }) => {
   const { formatMessage } = useIntl();
   const locale = useConfigStore((state) => state.locale);
@@ -38,7 +36,7 @@ export const CompletedAt: React.FC<{ readonly doneAt: number }> = ({ doneAt }) =
         : formatMessage({ id: "progress.agoMinutes" }, { minutes });
 
   return (
-    <Typography variant="caption" sx={{ color: colors.textMuted }}>
+    <Typography variant="caption" sx={{ color: "text.secondary" }}>
       {formatMessage({ id: "progress.completedAt" }, { time: timeLabel })} ({agoText})
     </Typography>
   );
