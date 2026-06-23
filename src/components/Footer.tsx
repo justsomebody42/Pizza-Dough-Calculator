@@ -31,11 +31,19 @@ export const Footer = () => (
         <OpenInNewIcon fontSize="inherit" />
       </Link>
       <span>·</span>
-      <FormattedMessage
-        id="footer.version"
-        defaultMessage="⭐ v{version}"
-        values={{ version: __APP_VERSION__ }}
-      />
+      {__APP_COMMIT__ === "" ? (
+        <FormattedMessage
+          id="footer.version"
+          defaultMessage="⭐ v{version}"
+          values={{ version: __APP_VERSION__ }}
+        />
+      ) : (
+        <FormattedMessage
+          id="footer.versionWithCommit"
+          defaultMessage="⭐ v{version} ({commit})"
+          values={{ version: __APP_VERSION__, commit: __APP_COMMIT__ }}
+        />
+      )}
     </Typography>
   </Box>
 );

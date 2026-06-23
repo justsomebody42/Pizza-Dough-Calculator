@@ -23,6 +23,7 @@ export const messages = {
     "tips.close": "Schließen",
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
+    "footer.versionWithCommit": "⭐ v{version} ({commit})",
     "progress.start": "Timer starten",
     "progress.remainingWithSeconds":
       "Noch {hours} Std. {minutes} Min. {seconds} Sek.",
@@ -191,6 +192,7 @@ export const messages = {
     "tips.close": "Close",
     "error.unavailable": "{reason}",
     "footer.version": "⭐ v{version}",
+    "footer.versionWithCommit": "⭐ v{version} ({commit})",
     "progress.start": "Start timer",
     "progress.remainingWithSeconds": "{hours}h {minutes}m {seconds}s left",
     "progress.readyAt": "Ready: {time}",
