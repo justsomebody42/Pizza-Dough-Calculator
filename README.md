@@ -21,7 +21,7 @@ The recipies are based on various recipies I tried and are a combination of what
 - Installable as a Progressive Web App (PWA) with offline support
 - Remembers your last settings, step progress and scheduled bake time per recipe in your browser
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.png?v=2)
 
 ## Contributing
 

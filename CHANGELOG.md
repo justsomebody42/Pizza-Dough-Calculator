@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Updated screenshot
 - Added commit id to footer
 - Added downloadable calendar item as reminder to start the dough
 - Added CHANGELOG

@@ -21,7 +21,7 @@ Die Rezepte basieren auf verschiedenen Rezepten, die ich ausprobiert habe und si
 - Installierbar als Progressive Web App (PWA) mit Offline-Unterstützung
 - Merkt sich deine letzten Einstellungen, deinen Fortschritt und die geplante Backzeit pro Rezept im Browser
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.png?v=2)
 
 ## Mitwirken
 
