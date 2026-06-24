@@ -44,16 +44,18 @@ const buildIcsContent = (params: {
 const isAbortError = (error: unknown): boolean =>
   error instanceof DOMException && error.name === "AbortError";
 
-const downloadIcsFile = (filename: string, icsContent: string): void => {
+const downloadIcsFile = (icsContent: string): void => {
   const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = filename;
+  link.target = "_blank";
+  link.rel = "noopener";
   document.body.appendChild(link);
   link.click();
   link.remove();
-  URL.revokeObjectURL(url);
+  // Delay revocation so the new tab/intent handler has time to read the blob.
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 };
 
 export const downloadIcsReminder = async (params: {
@@ -78,5 +80,5 @@ export const downloadIcsReminder = async (params: {
     }
   }
 
-  downloadIcsFile(filename, icsContent);
+  downloadIcsFile(icsContent);
 };

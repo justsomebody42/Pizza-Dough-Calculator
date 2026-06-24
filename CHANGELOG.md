@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## v1.3.1
+
+- Fixed that .ics always triggered a download
+
+## v1.3.0
 
 - Updated screenshot
 - Added commit id to footer
