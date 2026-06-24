@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Hide completed steps to improve readability
+
 ## v1.3.2
 
 - Fixed that mobile browser could fail to load the page

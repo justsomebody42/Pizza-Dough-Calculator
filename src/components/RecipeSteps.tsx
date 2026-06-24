@@ -103,6 +103,14 @@ export const RecipeSteps: React.FC<{
   const projectedReadyAt = anyStepStarted ? stepSchedule.at(-1)?.end : undefined;
   const firstStepDone = recipeProgress?.[0]?.done ?? false;
 
+  // Completed steps can no longer be unchecked once the next one starts, so
+  // only the most recently completed step is worth showing - earlier ones
+  // just take up space.
+  const lastDoneIndex = steps.reduce(
+    (lastIndex, _, index) => (recipeProgress?.[index]?.done ? index : lastIndex),
+    -1,
+  );
+
   return (
     <Card>
       <CardContent>
@@ -149,6 +157,10 @@ export const RecipeSteps: React.FC<{
           {steps.map((step, index) => {
             const entry = recipeProgress?.[index];
             const done = entry?.done ?? false;
+            if (done && index !== lastDoneIndex) {
+              return null;
+            }
+
             const previousDone = index === 0 || (recipeProgress?.[index - 1]?.done ?? false);
             const nextDone = recipeProgress?.[index + 1]?.done ?? false;
             const checkboxDisabled = done ? nextDone : !previousDone;
@@ -205,7 +217,7 @@ export const RecipeSteps: React.FC<{
                         {formatMessage({ id: step.textId }, textParams)}
                       </Typography>
                       {canAdjustInline && waitMinutes !== undefined && (
-                        <Box sx={{ mt: 0.5, display: "flex", gap: 1 }}>
+                        <Box sx={{ mt: 0.5, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1 }}>
                           <Box sx={{ maxWidth: 220 }}>
                             <RiseTimeStepper
                               value={waitMinutes}
