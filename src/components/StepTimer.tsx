@@ -40,9 +40,28 @@ export const StepTimer: React.FC<{
     }
 
     if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-      void new Notification(formatMessage({ id: "progress.notificationTitle" }), {
-        body: formatMessage({ id: "progress.notificationBody" }, { stepTitle }),
-      });
+      const title = formatMessage({ id: "progress.notificationTitle" });
+      const body = formatMessage({ id: "progress.notificationBody" }, { stepTitle });
+
+      void (async () => {
+        try {
+          // Mobile browsers (notably Android Chrome) don't support `new
+          // Notification()` and throw instead - they require showing
+          // notifications through the service worker.
+          const registration =
+            typeof navigator !== "undefined" && "serviceWorker" in navigator
+              ? await navigator.serviceWorker.getRegistration()
+              : undefined;
+
+          if (registration) {
+            await registration.showNotification(title, { body });
+          } else {
+            new Notification(title, { body });
+          }
+        } catch {
+          // Notifications are best-effort; never let a platform quirk crash the app.
+        }
+      })();
     }
 
     onNotified();

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.2
+
+- Fixed that mobile browser could fail to load the page
+
 ## v1.3.1
 
 - Fixed that .ics always triggered a download

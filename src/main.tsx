@@ -8,10 +8,14 @@ import "@fontsource/roboto/latin-400.css";
 import "@fontsource/roboto/latin-500.css";
 import "@fontsource/roboto/latin-700.css";
 import { App } from "./App";
+import { CrashFallback } from "./components/CrashFallback";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { messages } from "./i18n/messages";
 import { useConfigStore } from "./store";
 import { createAppTheme } from "./theme";
 import "./index.css";
+
+const renderCrashFallback = (error: Error) => <CrashFallback error={error} />;
 
 const Root = () => {
   const locale = useConfigStore((state) => state.locale);
@@ -22,7 +26,9 @@ const Root = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <IntlProvider locale={locale} defaultLocale="de" messages={messages[locale]}>
-        <App />
+        <ErrorBoundary fallback={renderCrashFallback}>
+          <App />
+        </ErrorBoundary>
       </IntlProvider>
     </ThemeProvider>
   );
