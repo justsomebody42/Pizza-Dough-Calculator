@@ -8,6 +8,9 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
+import type { StepProgressEntry } from "../progressStore";
+import type { RecipeStep } from "../recipesData";
+import { getEarliestReadyAt } from "../scheduleUtils";
 
 const toLocalInputValue = (date: Date): string => {
   const pad = (value: number) => String(value).padStart(2, "0");
@@ -20,19 +23,20 @@ const toLocalInputValue = (date: Date): string => {
 export const BakeTimeDialog: React.FC<{
   readonly open: boolean;
   readonly initialValue: number | undefined;
-  readonly totalWaitMinutes: number;
+  readonly steps: readonly RecipeStep[];
+  readonly recipeProgress: Record<number, StepProgressEntry> | undefined;
   readonly onClose: () => void;
   readonly onConfirm: (timestamp: number) => void;
-}> = ({ open, initialValue, totalWaitMinutes, onClose, onConfirm }) => {
+}> = ({ open, initialValue, steps, recipeProgress, onClose, onConfirm }) => {
   const [value, setValue] = useState("");
   const [earliestBakeAt, setEarliestBakeAt] = useState(() => Date.now());
 
   useEffect(() => {
     if (open) {
       setValue(initialValue === undefined ? "" : toLocalInputValue(new Date(initialValue)));
-      setEarliestBakeAt(Date.now() + totalWaitMinutes * 60_000);
+      setEarliestBakeAt(getEarliestReadyAt(steps, recipeProgress, Date.now()));
     }
-  }, [open, initialValue, totalWaitMinutes]);
+  }, [open, initialValue, steps, recipeProgress]);
 
   const timestamp = value === "" ? undefined : new Date(value).getTime();
   const isTooSoon = timestamp !== undefined && timestamp < earliestBakeAt;

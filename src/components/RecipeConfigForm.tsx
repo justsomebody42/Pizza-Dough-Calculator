@@ -336,7 +336,8 @@ export const RecipeConfigForm: React.FC<{
           <BakeTimeDialog
             open={pickerOpen}
             initialValue={bakeAt}
-            totalWaitMinutes={totalWaitMinutes}
+            steps={steps}
+            recipeProgress={recipeProgress}
             onClose={() => setPickerOpen(false)}
             onConfirm={(timestamp) => setBakeAt(recipeKey, timestamp)}
           />

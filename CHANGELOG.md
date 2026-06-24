@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Correctly calculate earliest ready at for modified recipies
 - Hide completed steps to improve readability
 
 ## v1.3.2
