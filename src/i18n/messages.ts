@@ -66,6 +66,8 @@ export const messages = {
       "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min. Du musst ihn am <highlightStart>{startWeekday}, den {startDate} um {startTime} Uhr</highlightStart> starten, damit er am <highlightReady>{readyWeekday}, den {readyDate} um {readyTime} Uhr</highlightReady> fertig zum Backen ist.",
     "progress.totalDurationStartNow":
       "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min. Du musst ihn jetzt starten, damit er am <highlightReady>{readyWeekday}, den {readyDate} um {readyTime} Uhr</highlightReady> fertig zum Backen ist.",
+    "progress.totalDurationRunning":
+      "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min. Er läuft bereits und ist voraussichtlich am <highlightReady>{readyWeekday}, den {readyDate} um {readyTime} Uhr</highlightReady> fertig zum Backen.",
     "progress.stepStartAt": "Start: {time}",
     "progress.projectedReadyAt": "Voraussichtlich fertig: {time}",
     "progress.resetWaitMinutes": "Auf empfohlene Dauer zurücksetzen",
@@ -242,6 +244,8 @@ export const messages = {
       "The dough will take {days}d {hours}h {minutes}m in total. You need to start it on <highlightStart>{startWeekday}, {startDate} at {startTime}</highlightStart> so that it's ready to bake on <highlightReady>{readyWeekday}, {readyDate} at {readyTime}</highlightReady>.",
     "progress.totalDurationStartNow":
       "The dough will take {days}d {hours}h {minutes}m in total. You need to start it now so that it's ready to bake on <highlightReady>{readyWeekday}, {readyDate} at {readyTime}</highlightReady>.",
+    "progress.totalDurationRunning":
+      "The dough will take {days}d {hours}h {minutes}m in total. It has already been started and should be ready to bake on <highlightReady>{readyWeekday}, {readyDate} at {readyTime}</highlightReady>.",
     "progress.stepStartAt": "Start: {time}",
     "progress.projectedReadyAt": "Likely ready: {time}",
     "progress.resetWaitMinutes": "Reset to recommended duration",

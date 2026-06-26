@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Updated info message, when the dough is already in progress
 - Added calendar export for long rise time step finish
 - Correctly calculate earliest ready at for modified recipies
 - Hide completed steps to improve readability
