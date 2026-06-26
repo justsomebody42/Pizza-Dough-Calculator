@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Only deploy github site for tag builds
+
+## v1.4.0
+
 - Updated info message, when the dough is already in progress
 - Added calendar export for long rise time step finish
 - Correctly calculate earliest ready at for modified recipies
