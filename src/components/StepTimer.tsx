@@ -1,19 +1,32 @@
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import StopIcon from "@mui/icons-material/Stop";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { formatClockLabel } from "../dateFormat";
+import { downloadIcsReminder } from "../ics";
 import { useConfigStore } from "../store";
 import { ConfirmDialog } from "./ConfirmDialog";
+
+const CALENDAR_REMINDER_THRESHOLD_MINUTES = 60;
 
 export const StepTimer: React.FC<{
   readonly waitMinutes: number;
   readonly startedAt: number;
   readonly notified: boolean;
   readonly stepTitle: string;
+  readonly nextStepTitle?: string;
   readonly onStop: () => void;
   readonly onNotified: () => void;
-}> = ({ waitMinutes, startedAt, notified, stepTitle, onStop, onNotified }) => {
+}> = ({
+  waitMinutes,
+  startedAt,
+  notified,
+  stepTitle,
+  nextStepTitle,
+  onStop,
+  onNotified,
+}) => {
   const { formatMessage } = useIntl();
   const locale = useConfigStore((state) => state.locale);
   const [now, setNow] = useState(() => Date.now());
@@ -81,12 +94,50 @@ export const StepTimer: React.FC<{
   const minutes = Math.floor((totalSecondsLeft % 3600) / 60);
   const seconds = totalSecondsLeft % 60;
 
+  const showCalendarReminder =
+    waitMinutes > CALENDAR_REMINDER_THRESHOLD_MINUTES;
+
+  const handleAddToCalendar = () => {
+    void downloadIcsReminder({
+      filename: "pizza-teig-schritt.ics",
+      title: formatMessage({ id: "progress.calendarStepReadyTitle" }, { stepTitle }),
+      description:
+        nextStepTitle === undefined
+          ? formatMessage(
+              { id: "progress.calendarStepReadyDescriptionLast" },
+              { stepTitle },
+            )
+          : formatMessage(
+              { id: "progress.calendarStepReadyDescription" },
+              { stepTitle, nextStepTitle },
+            ),
+      start: new Date(target),
+      durationMinutes: 15,
+    });
+  };
+
   return (
     <Box sx={{ mt: 0.5 }}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
         <Typography variant="body2" sx={{ color: "custom.water" }}>
           {formatMessage({ id: "progress.remainingWithSeconds" }, { hours, minutes, seconds })}
         </Typography>
+        {showCalendarReminder && (
+          <Tooltip
+            title={formatMessage({ id: "progress.addStepReadyToCalendar" })}
+          >
+            <IconButton
+              size="small"
+              onClick={handleAddToCalendar}
+              aria-label={formatMessage({
+                id: "progress.addStepReadyToCalendar",
+              })}
+              sx={{ color: "text.secondary", p: 0.25 }}
+            >
+              <CalendarMonthOutlinedIcon fontSize="inherit" />
+            </IconButton>
+          </Tooltip>
+        )}
         <Tooltip title={formatMessage({ id: "progress.stop" })}>
           <IconButton
             size="small"

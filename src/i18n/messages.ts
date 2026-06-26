@@ -50,10 +50,16 @@ export const messages = {
     "progress.clearBakeAtBody":
       "Der geplante Backzeitpunkt und der zugehörige Timer werden entfernt.",
     "progress.clearBakeAtConfirm": "Entfernen",
-    "progress.addToCalendar": "Zum Kalender hinzufügen",
+    "progress.addToCalendar": "Startzeit zum Kalender hinzufügen",
     "progress.calendarEventTitle": "Pizzateig ansetzen",
     "progress.calendarEventDescription":
       "Teig für {mehlart} ({gehzeit}) jetzt ansetzen, damit er pünktlich um {time} Uhr am {weekday} den {date} fertig zum Backen ist.",
+    "progress.addStepReadyToCalendar": "Fertig-Erinnerung zum Kalender hinzufügen",
+    "progress.calendarStepReadyTitle": "{stepTitle} fertig",
+    "progress.calendarStepReadyDescription":
+      "{stepTitle} ist fertig! Weiter geht's mit: {nextStepTitle}.",
+    "progress.calendarStepReadyDescriptionLast":
+      "{stepTitle} ist fertig! Zeit zum Backen.",
     "progress.totalDurationOnly":
       "Der Teig braucht insgesamt {days} Tg. {hours} Std. {minutes} Min.",
     "progress.totalDurationStart":
@@ -220,10 +226,16 @@ export const messages = {
     "progress.clearBakeAtBody":
       "This will remove the scheduled bake time and its timer.",
     "progress.clearBakeAtConfirm": "Clear",
-    "progress.addToCalendar": "Add to calendar",
+    "progress.addToCalendar": "Add start time to calendar",
     "progress.calendarEventTitle": "Start the pizza dough",
     "progress.calendarEventDescription":
       "Start the {mehlart} dough ({gehzeit}) now so it's ready to bake by {time} on {weekday}, {date}.",
+    "progress.addStepReadyToCalendar": "Add ready reminder to calendar",
+    "progress.calendarStepReadyTitle": "{stepTitle} finished",
+    "progress.calendarStepReadyDescription":
+      "{stepTitle} is ready! Continue with: {nextStepTitle}.",
+    "progress.calendarStepReadyDescriptionLast":
+      "{stepTitle} is ready! Time to bake.",
     "progress.totalDurationOnly":
       "The dough will take {days}d {hours}h {minutes}m in total.",
     "progress.totalDurationStart":

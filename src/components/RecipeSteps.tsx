@@ -1,6 +1,15 @@
-import { Box, Button, Card, CardContent, Checkbox, IconButton, Tooltip, Typography } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import type { CalcValues } from "../calc";
@@ -19,7 +28,9 @@ import { StepTimer } from "./StepTimer";
 // Scales the +/- increment (and floor) to the step's own default wait time,
 // so adjusting a 5-minute step moves in small increments while a 24h cold
 // ferment moves in hour-sized jumps.
-const stepGranularity = (baseMinutes: number): { readonly stepMinutes: number; readonly minMinutes: number } => {
+const stepGranularity = (
+  baseMinutes: number,
+): { readonly stepMinutes: number; readonly minMinutes: number } => {
   if (baseMinutes <= 30) {
     return { stepMinutes: 5, minMinutes: 5 };
   }
@@ -44,8 +55,12 @@ export const RecipeSteps: React.FC<{
   const startTimer = useProgressStore((state) => state.startTimer);
   const stopTimer = useProgressStore((state) => state.stopTimer);
   const markNotified = useProgressStore((state) => state.markNotified);
-  const setWaitMinutesOverride = useProgressStore((state) => state.setWaitMinutesOverride);
-  const resetWaitMinutesOverride = useProgressStore((state) => state.resetWaitMinutesOverride);
+  const setWaitMinutesOverride = useProgressStore(
+    (state) => state.setWaitMinutesOverride,
+  );
+  const resetWaitMinutesOverride = useProgressStore(
+    (state) => state.resetWaitMinutesOverride,
+  );
   const bakeAt = useProgressStore((state) => state.bakeAt[recipeKey]);
   const resetRecipe = useProgressStore((state) => state.resetRecipe);
   const [resetOpen, setResetOpen] = useState(false);
@@ -70,8 +85,10 @@ export const RecipeSteps: React.FC<{
     flourAmount: formatGrams(calcValues.mehl),
   };
 
-  const effectiveWaitMinutes = (step: RecipeStep, index: number): number | undefined =>
-    getEffectiveWaitMinutes(step, index, recipeProgress);
+  const effectiveWaitMinutes = (
+    step: RecipeStep,
+    index: number,
+  ): number | undefined => getEffectiveWaitMinutes(step, index, recipeProgress);
 
   const totalWaitMinutes = getTotalWaitMinutes(steps, recipeProgress);
 
@@ -81,8 +98,10 @@ export const RecipeSteps: React.FC<{
   // Before anything has actually started, the cursor begins at the planned
   // start time (derived from the target bake time), so adjusting any step's
   // timer reschedules the first step's start to still hit that target.
-  const plannedStartAt = bakeAt === undefined ? undefined : bakeAt - totalWaitMinutes * 60_000;
-  const stepSchedule: Array<{ readonly start: number; readonly end: number }> = [];
+  const plannedStartAt =
+    bakeAt === undefined ? undefined : bakeAt - totalWaitMinutes * 60_000;
+  const stepSchedule: Array<{ readonly start: number; readonly end: number }> =
+    [];
   let cursor = plannedStartAt ?? now;
   steps.forEach((step, index) => {
     const entry = recipeProgress?.[index];
@@ -99,15 +118,18 @@ export const RecipeSteps: React.FC<{
     stepSchedule.push({ start, end });
   });
 
-  const anyStepStarted = steps.some((_, index) => recipeProgress?.[index]?.startedAt !== undefined);
-  const projectedReadyAt = anyStepStarted ? stepSchedule.at(-1)?.end : undefined;
+  const anyStepStarted = steps.some(
+    (_, index) => recipeProgress?.[index]?.startedAt !== undefined,
+  );
+  const projectedReadyAt = anyStepStarted
+    ? stepSchedule.at(-1)?.end
+    : undefined;
   const firstStepDone = recipeProgress?.[0]?.done ?? false;
 
-  // Completed steps can no longer be unchecked once the next one starts, so
-  // only the most recently completed step is worth showing - earlier ones
-  // just take up space.
+  // Completed steps can no longer be unchecked once the next one starts, so only the most recently completed step is worth showing
   const lastDoneIndex = steps.reduce(
-    (lastIndex, _, index) => (recipeProgress?.[index]?.done ? index : lastIndex),
+    (lastIndex, _, index) =>
+      recipeProgress?.[index]?.done ? index : lastIndex,
     -1,
   );
 
@@ -137,7 +159,13 @@ export const RecipeSteps: React.FC<{
               >
                 {formatMessage(
                   { id: "progress.projectedReadyAt" },
-                  { time: formatClockLabel(new Date(projectedReadyAt), locale, now) },
+                  {
+                    time: formatClockLabel(
+                      new Date(projectedReadyAt),
+                      locale,
+                      now,
+                    ),
+                  },
                 )}
               </Typography>
             )}
@@ -149,7 +177,10 @@ export const RecipeSteps: React.FC<{
               onClick={() => setResetOpen(true)}
               sx={{ color: "text.secondary", order: { xs: 0, md: 2 } }}
             >
-              <FormattedMessage id="progress.newDough" defaultMessage="Start new dough" />
+              <FormattedMessage
+                id="progress.newDough"
+                defaultMessage="Start new dough"
+              />
             </Button>
           )}
         </Box>
@@ -161,15 +192,24 @@ export const RecipeSteps: React.FC<{
               return null;
             }
 
-            const previousDone = index === 0 || (recipeProgress?.[index - 1]?.done ?? false);
+            const previousDone =
+              index === 0 || (recipeProgress?.[index - 1]?.done ?? false);
             const nextDone = recipeProgress?.[index + 1]?.done ?? false;
             const checkboxDisabled = done ? nextDone : !previousDone;
             const waitMinutes = effectiveWaitMinutes(step, index);
             const hasWaitMinutes = waitMinutes !== undefined;
             const textParams = hasWaitMinutes
-              ? { ...amounts, duration: getDurationLabel(waitMinutes, locale, formatMessage) }
+              ? {
+                  ...amounts,
+                  duration: getDurationLabel(
+                    waitMinutes,
+                    locale,
+                    formatMessage,
+                  ),
+                }
               : amounts;
-            const canAdjustInline = hasWaitMinutes && !done && entry?.startedAt === undefined;
+            const canAdjustInline =
+              hasWaitMinutes && !done && entry?.startedAt === undefined;
 
             return (
               <Box
@@ -204,33 +244,71 @@ export const RecipeSteps: React.FC<{
                     {index + 1}. {formatMessage({ id: step.titleId })}
                   </Typography>
                   {done ? (
-                    entry?.doneAt !== undefined && <CompletedAt doneAt={entry.doneAt} />
+                    entry?.doneAt !== undefined && (
+                      <CompletedAt doneAt={entry.doneAt} />
+                    )
                   ) : (
                     <>
-                      <Typography variant="caption" sx={{ color: "text.secondary", display: "block" }}>
+                      <Typography
+                        variant="caption"
+                        sx={{ color: "text.secondary", display: "block" }}
+                      >
                         {formatMessage(
                           { id: "progress.stepStartAt" },
-                          { time: formatClockLabel(new Date(stepSchedule[index].start), locale, now) },
+                          {
+                            time: formatClockLabel(
+                              new Date(stepSchedule[index].start),
+                              locale,
+                              now,
+                            ),
+                          },
                         )}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5 }}>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", mt: 0.5 }}
+                      >
                         {formatMessage({ id: step.textId }, textParams)}
                       </Typography>
                       {canAdjustInline && waitMinutes !== undefined && (
-                        <Box sx={{ mt: 0.5, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{
+                            mt: 0.5,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            alignItems: "center",
+                            gap: 1,
+                          }}
+                        >
                           <Box sx={{ maxWidth: 220 }}>
                             <RiseTimeStepper
                               value={waitMinutes}
-                              {...stepGranularity(step.waitMinutes ?? waitMinutes)}
-                              onChange={(minutes) => setWaitMinutesOverride(recipeKey, index, minutes)}
+                              {...stepGranularity(
+                                step.waitMinutes ?? waitMinutes,
+                              )}
+                              onChange={(minutes) =>
+                                setWaitMinutesOverride(
+                                  recipeKey,
+                                  index,
+                                  minutes,
+                                )
+                              }
                             />
                           </Box>
                           {entry?.waitMinutesOverride !== undefined && (
-                            <Tooltip title={formatMessage({ id: "progress.resetWaitMinutes" })}>
+                            <Tooltip
+                              title={formatMessage({
+                                id: "progress.resetWaitMinutes",
+                              })}
+                            >
                               <IconButton
                                 size="small"
-                                onClick={() => resetWaitMinutesOverride(recipeKey, index)}
-                                aria-label={formatMessage({ id: "progress.resetWaitMinutes" })}
+                                onClick={() =>
+                                  resetWaitMinutesOverride(recipeKey, index)
+                                }
+                                aria-label={formatMessage({
+                                  id: "progress.resetWaitMinutes",
+                                })}
                                 sx={{ color: "text.secondary", p: 0.5 }}
                               >
                                 <RestartAltIcon fontSize="small" />
@@ -251,23 +329,34 @@ export const RecipeSteps: React.FC<{
                                 }
                                 startTimer(recipeKey, index);
                               }}
-                              sx={{ color: "primary.main", borderColor: "primary.main" }}
+                              sx={{
+                                color: "primary.main",
+                                borderColor: "primary.main",
+                              }}
                             >
                               {formatMessage({ id: "progress.start" })}
                             </Button>
                           )}
                         </Box>
                       )}
-                      {waitMinutes !== undefined && entry?.startedAt !== undefined && (
-                        <StepTimer
-                          waitMinutes={waitMinutes}
-                          startedAt={entry.startedAt}
-                          notified={entry?.notified ?? false}
-                          stepTitle={formatMessage({ id: step.titleId })}
-                          onStop={() => stopTimer(recipeKey, index)}
-                          onNotified={() => markNotified(recipeKey, index)}
-                        />
-                      )}
+                      {waitMinutes !== undefined &&
+                        entry?.startedAt !== undefined && (
+                          <StepTimer
+                            waitMinutes={waitMinutes}
+                            startedAt={entry.startedAt}
+                            notified={entry?.notified ?? false}
+                            stepTitle={formatMessage({ id: step.titleId })}
+                            nextStepTitle={
+                              steps[index + 1] === undefined
+                                ? undefined
+                                : formatMessage({
+                                    id: steps[index + 1].titleId,
+                                  })
+                            }
+                            onStop={() => stopTimer(recipeKey, index)}
+                            onNotified={() => markNotified(recipeKey, index)}
+                          />
+                        )}
                     </>
                   )}
                 </Box>
