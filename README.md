@@ -27,6 +27,8 @@ The recipies are based on various recipies I tried and are a combination of what
 
 Contributions are welcome! Feel free to share ideas or report bugs via [issues](https://github.com/justsomebody42/Pizza-Dough-Calculator/issues), and pull requests are welcome as well.
 
+`CHANGELOG.md` is generated from commit messages. Running `npm install` configures git to use the hooks in [.githooks](.githooks), which regenerate it after every commit.
+
 ## AI disclaimer
 
 AI tools were used to assist during the development.

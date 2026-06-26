@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -e
+
+cd "$(git rev-parse --show-toplevel)"
+node scripts/updateChangelog.js
+
+if ! git diff --quiet -- CHANGELOG.md; then
+  git add CHANGELOG.md
+  git commit --amend --no-edit --no-verify
+fi

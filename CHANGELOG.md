@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Automatically update CHANGELOG.md in post-commit hook
 - Only deploy github site for tag builds
 
 ## v1.4.0
